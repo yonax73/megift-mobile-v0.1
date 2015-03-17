@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Megift App Gift Results Search</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
+</head>
+
+<body class="i-ease-in i-1s i-fade-in">
+    <div class="content-main">
+        <div id="nav-app" class="nav-app  hidden ">
+            <div class="list-group">
+                <a class="list-group-item list-group-item active" href="../partner/partner.html" rel="external">
+                    <i class="fa fa-user fa-fw fa-2x"></i>&nbsp; Mi Perfil
+                </a>
+                <a class="list-group-item list-group-item active" href="search-gift.html" rel="external">
+                    <i class="fa fa-gift fa-fw fa-2x"></i>&nbsp; Buscar regalos
+                </a>
+                <a class="list-group-item list-group-item active" href="../../social/inviteFriends.html" rel="external">
+                    <i class="fa fa-share-alt fa-fw fa-2x"></i>&nbsp; Invitar amigos
+                </a>
+                <a class="list-group-item list-group-item active" href="../../sec/settings/settings.html" rel="external">
+                    <i class="fa fa-wrench fa-fw fa-2x"></i>&nbsp; Ajustes
+                </a>
+                <a class="list-group-item list-group-item active" href="../../sec/login/help.html" rel="external">
+                    <i class="fa fa-info-circle fa-fw fa-2x"></i>&nbsp; Ayuda
+                </a>
+                <a class="list-group-item list-group-item active" href="#" onclick="singOut()">
+                    <i class="fa fa-sign-out fa-fw fa-2x"></i>&nbsp; Cerrar sesión
+                </a>
+            </div>
+        </div>
+        <div class="content-app">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header" onclick="toggleNav()">
+                        <span class="navbar-brand">
+                            <i class="fa fa-bars"></i>
+                        </span>
+                        <p class="navbar-text">Regalos para disfrutar</p>
+                    </div>
+                </div>
+            </nav>
+            <section class="container-fluid" onclick="hiddenNav()">
+                <div id="cover-gift" class="row text-center"></div>
+            </section>
+        </div>
+    </div>
+    <div class="i-popup-mask hidden"></div>
+    <div id="before-send-popup" class="i-popup-panel i-popup-primary hidden text-primary text-center">
+        <h4><i class="fa fa-spinner fa-pulse fa-5x"></i></h4>
+        <h5>Enviando, por favor espera...</h5>
+    </div>
+    <div id="error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
+        <p>Lo siento, ha ocurrido un error(<span id="error-msg"></span>), intentalo nuevamente!</p>
+        <p>Si el error persiste puedes contactarnos a <span class="text-danger"><strong>soporte@megift.co</strong></span></p>
+        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    </div>
+    <div id="general-error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
+        <p id="general-error-msg"></p>
+        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    </div>
+
+    <script src="../../intelxdk.js"></script>
+    <script src="../../cordova.js"></script>
+    <script src="../../xhr.js"></script>
+    <script src="../../js/inventor/Inventor.min.js"></script>
+    <script src="../../js/inventor/InventorMobile.min.js"></script>
+    <script>
+        var successResponse = "OK";
+        var localHost = 'http://localhost:9000';
+        var host = window.localStorage.getItem('host');
+        var idLogin = window.localStorage.getItem('id-login');
+        var posList = JSON.parse(window.localStorage.getItem('POS-list'));
+        var beforeSendPopup = new Popup(document.getElementById('before-send-popup'));
+        var errorPopup = new Popup(document.getElementById('error-popup'));
+        var generalErrorPopup = new Popup(document.getElementById('general-error-popup'));
+        //device onready
+        function onDeviceReady() {
+            init();
+        }
+        document.addEventListener("deviceready", onDeviceReady, false);
+        // for local work in web broswers
+        //not working on device test app
+        /*if (host === localHost) {
+            init();
+        }*/
+        init();
+        //declare init
+        function init() {
+            initNav();
+            loadGifts();
+        }
+        //nav
+        function initNav() {
+            document.getElementById('nav-app').style.height = Utils.getWindowMaxHeight() + 'px';
+        }
+        function toggleNav() {
+            var nav = document.getElementById('nav-app');
+            nav.classList.toggle('hidden');
+        }
+        function hiddenNav() {
+            var nav = document.getElementById('nav-app');
+            if (!nav.classList.contains('hidden')) {
+                nav.classList.add('hidden');
+            }
+        }
+        function singOut() {
+            window.localStorage.clear();
+            window.localStorage.setItem("user-is-register",1);
+            window.location = '../../index.html';
+        }
+        //load gift
+        function loadGifts() {
+            var element = document.getElementById('cover-gift');
+            var n = posList.length;
+            for (var i = 0; i < n; i++) {
+                var pos = posList[i];
+                coverGift(element, pos.giftList, pos.name, pos.distanceFormatted, pos.id);
+            }
+        }
+        // Cover Gifts
+        function coverGift(element, gift, posName, posDistance, posId) {
+            var n = gift.length;
+            for (var i = 0; i < n; i++) {
+                var g = gift[i];
+                //col
+                var col = document.createElement('div');
+                col.classList.add('col-lg-4');
+                col.classList.add('col-md-4');
+                col.classList.add('col-sm-6');
+                col.classList.add('cover-col');
+                //content
+                var content = document.createElement('div');
+                content.classList.add('cover-content');
+                //header
+                var header = document.createElement('div');
+                header.classList.add('cover-header');
+                //img
+                var img = document.createElement('img');
+                img.src = g.mainPicture ? g.mainPicture.dataURI : '../images/gift.png';
+                header.appendChild(img);
+                header.dataset.posId = posId;
+                header.dataset.giftId = g.id;
+                //event header
+                header.onclick = function () {
+                    window.localStorage.setItem('pos-id', this.dataset.posId);
+                    window.localStorage.setItem('gift-id', this.dataset.giftId);
+                    window.location = 'gift.html';
+                }
+                //title
+                var title = document.createElement('div');
+                title.classList.add('cover-title');
+                var p = document.createElement('p');
+                p.appendChild(document.createTextNode(g.name));
+                title.appendChild(p);
+                //icon subtitle
+                var iconSubTitle = document.createElement('i');
+                iconSubTitle.className = 'text-danger fa fa-map-marker';
+                //subtitle
+                var subTitle = document.createElement('span');
+                subTitle.appendChild(iconSubTitle);
+                subTitle.appendChild(document.createTextNode(posName));
+                title.appendChild(subTitle);
+                header.appendChild(title);
+                //body
+                var body = document.createElement('div');
+                body.classList.add('cover-body');
+                //ul
+                var ul = document.createElement('ul');
+                //icon
+                var icon = document.createElement('i');
+                icon.className = ' fa fa-money';
+                //li
+                var li = document.createElement('li');
+                li.appendChild(icon);
+                var s = document.createElement('s');
+                s.textContent = g.priceFormatted;
+                li.appendChild(s);
+                var realPrice = document.createElement('span');
+                realPrice.classList.add('text-success');
+                realPrice.textContent = ' $' + 0;
+                li.appendChild(realPrice);
+                ul.appendChild(li);
+                //icon
+                icon = document.createElement('i');
+                icon.className = ' fa fa-clock-o';
+                //li
+                li = document.createElement('li');
+                li.appendChild(icon);
+                li.appendChild(document.createTextNode(g.elapseTime));
+                ul.appendChild(li);
+                //icon
+                icon = document.createElement('i');
+                icon.className = 'fa fa-car';
+                //li
+                li = document.createElement('li');
+                li.appendChild(icon);
+                li.appendChild(document.createTextNode(posDistance));
+                ul.appendChild(li);
+                body.appendChild(ul);
+
+                //appends
+                content.appendChild(header);
+                content.appendChild(body);
+                col.appendChild(content);
+                element.appendChild(col);
+            };
+        }
+    </script>
+</body>
+</html>

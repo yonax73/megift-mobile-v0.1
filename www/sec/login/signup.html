@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Megift App Sign up</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
+
+</head>
+<body class="i-ease-in i-1s i-fade-in">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <span class="navbar-brand ">
+                    <img src="../../../icon.png">
+                </span>
+                <p class="navbar-text">Crea tu perfil de regalo.</p>
+            </div>
+        </div>
+    </nav>
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Por favor completa la siguiente informaci&oacute;n para crear tu perfil.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <form id="signup-form" class="form-horizontal">
+                    <div class="form-group has-feedback">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control input-lg" id="name-partner" name="name-partner" data-name="true" placeholder="Nombre Completo">
+                            <span class="form-control-feedback"></span>
+                            <small class="i-form-error-msg text-danger hidden">El nombre es requerido!</small>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control input-lg" id="email-partner" name="email-partner" data-email="true" placeholder="Correo Electrónico">
+                            <span class="form-control-feedback"></span>
+                            <small class="i-form-error-msg text-danger hidden">El correo es requerido!</small>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control input-lg" name="password-partner" data-required="true" placeholder="Contraseña">
+                            <span class="form-control-feedback"></span>
+                            <small class="i-form-error-msg text-danger hidden">La contrase&ntilde;a es requerida!</small>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control input-lg" data-required="true" data-equalsto="password-partner" placeholder="Confirmar Contraseña">
+                            <span class="form-control-feedback"></span>
+                            <small class="i-form-error-msg text-danger hidden">La contrase&ntilde;a no coincide!</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <h6>
+                                Al hacer clic en continuar aceptas las
+                                <a href="termsAndConditions.html" rel="external">condiciones</a>
+                                y que has le&iacute;do las
+                                <a href="privacyPolicy.html" rel="external">pol&iacute;ticas de privacidad</a>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success btn-lg btn-block">Continuar</button>
+                        </div>
+                    </div>
+                </form>
+                <a href="login.html" rel="external">Ya tengo una cuenta.! Ingresa aqu&iacute;.</a>
+            </div>
+        </div>
+    </section>
+    <div class="i-popup-mask hidden"></div>
+    <div id="before-send-popup" class="i-popup-panel i-popup-primary hidden text-primary text-center">
+        <h4><i class=" fa fa-spinner fa-pulse fa-5x"></i></h4>
+        <h5>Enviando, por favor espera...</h5>
+    </div>
+    <div id="error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
+        <p>Lo siento, ha ocurrido un error(<span id="error-msg"></span>), intentalo nuevamente!</p>
+        <p>Si el error persiste puedes contactarnos a <span class="text-danger"><strong>soporte@megift.co</strong></span></p>
+        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    </div>
+    <div id="general-error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
+        <p id="general-error-msg"></p>
+        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    </div>
+    <div id="success-popup" class="i-popup-panel i-popup-success hidden text-justify">
+        <h3>Bienvenido</h3>
+        <h4>Tu cuenta ha sido creada con éxito</h4>
+        <a href="../../social/sendInvitationsControl.html" rel="external" class="btn btn-success btn-lg btn-block">Aceptar</a>
+    </div>
+
+    <script src="../../intelxdk.js"></script>
+    <script src="../../cordova.js"></script>
+    <script src="../../xhr.js"></script>
+    <script src="../../js/inventor/Inventor.min.js"></script>
+    <script src="../../js/inventor/InventorMobile.min.js"></script>
+    <script>
+        function onDeviceReady() {
+        }
+        document.addEventListener("deviceready", onDeviceReady, false);
+        //atributes
+        var successResponse = "OK";
+        var host = window.localStorage.getItem('host');
+        var beforeSendPopup = new Popup(document.getElementById('before-send-popup'));
+        var errorPopup = new Popup(document.getElementById('error-popup'));
+        var successPopup = new Popup(document.getElementById('success-popup'));
+        var generalErrorPopup = new Popup(document.getElementById('general-error-popup'));
+        var form = new Form(document.getElementById('signup-form'));
+        //signup form
+        form.onsubmit(function () {
+            if (form.isValid()) {
+                XHR.byPost(form.serialize(), host + '/createAccount', function () {
+                    beforeSendPopup.show();
+                }, function (xhr) {
+                    beforeSendPopup.close();
+                    var response = xhr.responseText;
+                    if (response > 0) {
+                        var partner = {};
+                        partner.name = document.getElementById('name-partner').value;
+                        partner.email = document.getElementById('email-partner').value;
+                        window.localStorage.setItem('id-login', response);
+                        window.localStorage.setItem('partner', JSON.stringify(partner));
+                        window.localStorage.setItem('show-menu',false);
+                        successPopup.show();
+                    } else {
+                        document.getElementById('general-error-msg').textContent = response;
+                        generalErrorPopup.show();
+                    }
+                }, function (xhr) {
+                    beforeSendPopup.close();
+                    document.getElementById('error-msg').textContent = xhr.statusText;
+                    errorPopup.show();
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

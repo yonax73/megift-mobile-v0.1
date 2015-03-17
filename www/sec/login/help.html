@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Megift App Help</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
+</head>
+
+<body class="i-ease-in i-1s i-fade-in">
+    <div class="content-main">
+        <div id="nav-app" class="nav-app  hidden ">
+            <div class="list-group">
+                <a class="list-group-item list-group-item active" href="../../bsp/partner/partner.html" rel="external">
+                    <i class="fa fa-user fa-fw fa-2x"></i>&nbsp; Mi Perfil
+                </a>
+                <a class="list-group-item list-group-item active" href="../../bsp/gift/search-gift.html" rel="external">
+                    <i class="fa fa-gift fa-fw fa-2x"></i>&nbsp; Buscar regalos
+                </a>
+                <a class="list-group-item list-group-item active" href="../../social/inviteFriends.html" rel="external">
+                    <i class="fa fa-share-alt fa-fw fa-2x"></i>&nbsp; Invitar amigos
+                </a>
+                <a class="list-group-item list-group-item active" href="../settings/settings.html" rel="external">
+                    <i class="fa fa-wrench fa-fw fa-2x"></i>&nbsp; Ajustes
+                </a>
+                <a class="list-group-item list-group-item active" href="#" onclick="toggleNav()">
+                    <i class="fa fa-info-circle fa-fw fa-2x"></i>&nbsp; Ayuda
+                </a>
+                <a class="list-group-item list-group-item active" href="#" onclick="singOut()">
+                    <i class="fa fa-sign-out fa-fw fa-2x"></i>&nbsp; Cerrar sesión
+                </a>
+            </div>
+        </div>
+        <div class="content-app">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header" onclick="toggleNav()">
+                        <span class="navbar-brand">
+                            <i class="fa fa-bars"></i>
+                        </span>
+                        <p class="navbar-text">Ayuda</p>
+                    </div>
+                </div>
+            </nav>
+            <section class="container-fluid text-center" onclick="hiddenNav()">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img src="../../images/logo121x57.png" alt="Megift" />
+                        <br />
+                        <br />
+                        <h4>"Megift te da regalos por hacer lo que más te gusta"</h4>
+                        <br />                       
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">                       
+                        <h4> ¿Deseas comunicarnos alguna sugerencia o error de la aplicación? escribenos a soporte@megift.co</h4>
+                        <br />                       
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">                       
+                        <a href="../settings/tutorial.html" rel="external" class="btn btn-primary btn-block btn-lg">Ver tutorial</a>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">                      
+                        <small>Version Beta -megift S.A.S</small>
+                        <br />
+                        <small>Todos los derechos reservados</small>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="../../intelxdk.js"></script>
+    <script src="../../cordova.js"></script>
+    <script src="../../xhr.js"></script>
+    <script src="../../js/inventor/Inventor.min.js"></script>
+    <script>
+        var localHost = 'http://localhost:9000';
+
+        // for local work in web broswers
+        //not working on device test app
+        /*if (host === localHost) {
+            init();
+        }*/
+        init();
+        //device ready
+        function onDeviceReady() {
+            init();
+        }
+        document.addEventListener("deviceready", onDeviceReady, false);
+        //init
+        function init() {
+            initNav();
+        }
+        function initNav() {
+            document.getElementById('nav-app').style.height = Utils.getWindowMaxHeight() + 'px';
+        }
+        function toggleNav() {
+            var nav = document.getElementById('nav-app');
+            nav.classList.toggle('hidden');
+        }
+        function hiddenNav() {
+            var nav = document.getElementById('nav-app');
+            if (!nav.classList.contains('hidden')) {
+                nav.classList.add('hidden');
+            }
+        }
+        function singOut() {
+            window.localStorage.clear();
+            window.localStorage.setItem("user-is-register", 1);
+            window.location = '../../index.html';
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Megift App Login</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="../../public/css/inventor/animations.min.css" rel="stylesheet" />
+    <link href="../../public/materialize/css/materialize.min.css" rel="stylesheet" />
+    <link href="../../public/css/app.min.css" rel="stylesheet" />
+</head>
+<body class="bg i-ease-in i-1s i-fade-in">
+    <nav class="simple-nav">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">
+                <img src="../../public/images/logo121x57.png" alt="megift" />
+            </a>
+        </div>
+    </nav>
+    <section class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-communication-email prefix"></i>
+                                        <input id="icon_prefix" type="text" class="validate">
+                                        <label for="icon_prefix">Correo Electrónico</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-action-lock prefix"></i>
+                                        <input id="icon_telephone" type="password" class="validate">
+                                        <label for="icon_telephone">Contraseña </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s-12">
+                                        <p>
+                                            <input type="checkbox" id="save-user-data" />
+                                            <label for="save-user-data">Recordar mis datos</label>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <button class="btn waves-effect waves-light btn-large btn-fluid" type="submit" name="action">
+                                            Enviar<i class="mdi-content-send right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <small>
+                            <a href="#" class="gray-800-text">Recuperar Contraseña</a>
+                            <strong><a href='#' class="red-500-text">Registrarse</a></strong>
+                        </small>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--<section class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <img class="logo-center" src="../../../www/images/logo121x57.png">
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <form id="login-form" class="form-horizontal">
+                    <div class="col-sm-10">
+                        <div class="form-group has-feedback">
+                            <input type="email" class="form-control input-lg" name="email-login" data-email="true" placeholder="Correo Electrónico">
+                            <span class="form-control-feedback"></span>
+                            <small class="i-form-error-msg text-danger hidden">El correo es requerido!</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="form-group has-feedback">
+                            <input type="password" class="form-control input-lg" name="password-login" data-required="true" placeholder="Contraseña">
+                            <span class="form-control-feedback"></span>
+                            <small class="i-form-error-msg text-danger hidden">La Contraseña es requerida!</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="form-group i-checkbox-horizontal">
+                            <span class="i-checkbox i-checkbox-toolbar i-checkbox-right i-checkbox-toolbar-default">
+                                <input type="checkbox" id="data-remember" checked="checked">
+                                <label for="data-remember">Recordar mis datos</label>
+                            </span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="business-type" value="3">
+                    <div class="col-sm-10 form-group">
+                        <button type="submit" class="btn btn-success btn-lg btn-block">Ingresar</button>
+                    </div>
+                </form>
+                <a class="col-sm-12" href="recoverpassword.html" rel="external">Olvide mi contrase&ntilde;a.</a><br>
+                <a class="col-sm-12" href="signup.html" rel="external">Registrate en megift.</a>
+            </div>
+        </div>
+    </section>
+    <div class="i-popup-mask hidden"></div>
+    <div id="before-send-popup" class="i-popup-panel i-popup-primary hidden text-primary text-center">
+        <h4><i class="fa fa-spinner fa-pulse fa-5x"></i></h4>
+        <h5>Enviando, por favor espera...</h5>
+    </div>
+    <div id="error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
+        <p>Lo siento, ha ocurrido un error(<span id="error-msg"></span>), intentalo nuevamente!</p>
+        <p>Si el error persiste puedes contactarnos a <span class="text-danger"><strong>soporte@megift.co</strong></span></p>
+        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    </div>
+    <div id="general-error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
+        <p id="general-error-msg"></p>
+        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    </div>-->
+
+    <script src="../../intelxdk.js"></script>
+    <script src="../../cordova.js"></script>
+    <script src="../../xhr.js"></script>
+    <script src="../../public/js/jquery.min.js"></script>
+    <script src="../../public/materialize/js/materialize.min.js"></script>
+
+    <script>
+        var localHost = 'http://localhost:9000';
+        var successResponse = "OK";
+        var host = window.localStorage.getItem('host');
+        //var form = new Form(document.getElementById('login-form'));
+        //var beforeSendPopup = new Popup(document.getElementById('before-send-popup'));
+        //var errorPopup = new Popup(document.getElementById('error-popup'));
+        //var generalErrorPopup = new Popup(document.getElementById('general-error-popup'));
+        //device ready
+        function onDeviceReady() {
+            init();
+        }
+        document.addEventListener("deviceready", onDeviceReady, false);
+        // for local work in web broswers
+        //not working on device test app
+        /*if (host === localHost) {
+            init();
+        }*/
+        init();
+        //delclre init
+        function init() {
+            // Initialize collapse button
+            $(".button-collapse").sideNav();
+
+
+        }
+
+
+
+
+        ////login form
+        //form.onsubmit(function () {
+        //    if (form.isValid()) {
+        //        XHR.byPost(form.serialize(), host + '/signIn', function () {
+        //            beforeSendPopup.show();
+        //        }, function (xhr) {
+        //            beforeSendPopup.close();
+        //            var response = xhr.responseText;
+        //            if (response > 0) {
+        //                window.localStorage.setItem('id-login', response);
+        //                window.location = '../../bsp/gift/search-gift.html';
+        //            } else {
+        //                document.getElementById('general-error-msg').textContent = response;
+        //                generalErrorPopup.show();
+        //            }
+        //        }, function (xhr) {
+        //            beforeSendPopup.close();
+        //            document.getElementById('error-msg').textContent = xhr.statusText;
+        //            errorPopup.show();
+        //        });
+        //    }
+        //});
+    </script>
+</body>
+</html>

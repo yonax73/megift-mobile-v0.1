@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Megift App Tutorial</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
+</head>
+
+<body class="i-ease-in i-1s i-fade-in">
+    <div class="content-main">
+        <div class="content-app">
+
+            <section class="container-fluid">
+                <div class="row">
+                    <div class="gift-tutorial">
+                        <div>
+                            <button id="step-1" type="button" class="active" onclick="goToStep(this,1)">1</button>
+                            <button id="step-2" type="button" onclick="goToStep(this,2)">2</button>
+                            <button id="step-3" type="button" onclick="goToStep(this,3)">3</button>
+                            <br />
+                            <p>
+                                <a href="../../bsp/gift/search-gift.html" rel="external">Omitir tutorial</a>
+                            </p>
+                        </div>
+                    </div>
+                    <img id="tutorial-img" src="../../images/tutorial/paso-1.png" />
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="../../intelxdk.js"></script>
+    <script src="../../cordova.js"></script>
+    <script src="../../xhr.js"></script>
+    <script>
+
+        var currentElement = document.getElementById('step-1');
+        function goToStep(element, value) {
+            if (currentElement.id !== element.id) {
+                currentElement.classList.remove('active');
+                element.classList.add('active');
+                currentElement = element;
+                switch (value) {
+                    case 1:
+                        document.getElementById('tutorial-img').src = '../../images/tutorial/paso-1.png';
+                        break;
+                    case 2:
+                        document.getElementById('tutorial-img').src = '../../images/tutorial/paso-2.png';
+                        break;
+                    case 3:
+                        document.getElementById('tutorial-img').src = '../../images/tutorial/paso-3.png';
+                        break;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

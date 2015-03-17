@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Megift App Invite friends</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="../css/inventor/megift.min.css" rel="stylesheet" media="screen">
+    <link href="../css/inventor/animations.min.css" rel="stylesheet" media="screen">
+    <link href="../css/app.min.css" rel="stylesheet" media="screen" />
+</head>
+<body class="i-ease-in i-1s i-fade-in">
+    <div class="content-main">
+        <div id="nav-app" class="nav-app  hidden ">
+            <div class="list-group">
+                <a class="list-group-item list-group-item active" href="../bsp/partner/partner.html" rel="external">
+                    <i class="fa fa-user fa-fw fa-2x"></i>&nbsp; Mi Perfil
+                </a>
+                <a class="list-group-item list-group-item active" href="../bsp/gift/search-gift.html" rel="external">
+                    <i class="fa fa-gift fa-fw fa-2x"></i>&nbsp; Buscar regalos
+                </a>
+                <a class="list-group-item list-group-item active" href="#" onclick="toggleNav()">
+                    <i class="fa fa-share-alt fa-fw fa-2x"></i>&nbsp; Invitar amigos
+                </a>
+                <a class="list-group-item list-group-item active" href="../sec/settings/settings.html" rel="external">
+                    <i class="fa fa-wrench fa-fw fa-2x"></i>&nbsp; Ajustes
+                </a>
+                <a class="list-group-item list-group-item active" href="../sec/login/help.html" rel="external">
+                    <i class="fa fa-info-circle fa-fw fa-2x"></i>&nbsp; Ayuda
+                </a>
+                <a class="list-group-item list-group-item active" href="#" onclick="singOut()">
+                    <i class="fa fa-sign-out fa-fw fa-2x"></i>&nbsp; Cerrar sesión
+                </a>
+            </div>
+        </div>
+        <div class="content-app">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header" onclick="toggleNav()">
+                        <span class="navbar-brand">
+                            <i class="fa fa-bars"></i>
+                        </span>
+                        <p class="navbar-text">Invitar amigos</p>
+                    </div>
+                </div>
+            </nav>
+            <section class="container-fluid" onclick="hiddenNav()">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Cuentale a dos amigos</h3>
+                        <form id="invite-friends-form" class="form-horizontal">
+                            <div class="form-group has-feedback">
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control input-lg" name="email-friend-1" data-email="true" placeholder="Correo Electrónico">
+                                    <span class="form-control-feedback"></span>
+                                    <small class="i-form-error-msg text-danger hidden">Ingrese un correo electrónico válido</small>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control input-lg" name="email-friend-2" data-email="true" placeholder="Correo Electrónico">
+                                    <span class="form-control-feedback"></span>
+                                    <small class="i-form-error-msg text-danger hidden">Ingrese un correo electrónico válido</small>
+                                </div>
+                            </div>
+                            <input type="hidden" name="name-partner" id="name-partner" />
+                            <input type="hidden" name="email-partner" id="email-partner" />
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success btn-lg btn-block">Enviar mensaje</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Ó cuentale a tus amigos de:</h4>
+                        <div class="circle">
+                            <a class="gmail" href="#">Gmail</a>
+                            <a class="outlook" href="#">Outlook</a>
+                            <a class="yahoo" href="#">Yahoo</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="i-popup-mask hidden"></div>
+    <div id="success-popup" class="i-popup-panel i-popup-primary hidden">
+        <h5>
+            El mensaje ha sido enviado.<br /><br />
+            Gracias por darnos la oportunidad de hacer a tus amigos felices.
+        </h5>
+        <br />
+        <a href="../sec/settings/tutorial.html" rel="external" class="btn btn-primary btn-lg btn-block">Buscar regalos</a>
+    </div>
+    <div id="before-send-popup" class="i-popup-panel i-popup-primary hidden text-primary text-center">
+        <h4><i class="fa fa-spinner fa-pulse fa-5x"></i></h4>
+        <h5>Enviando, por favor espera...</h5>
+    </div>
+    <div id="error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
+        <p>Lo siento, ha ocurrido un error(<span id="error-msg"></span>), intentalo nuevamente!</p>
+        <p>Si el error persiste puedes contactarnos a <span class="text-danger"><strong>soporte@megift.co</strong></span></p>
+        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    </div>
+    <div id="general-error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
+        <p id="general-error-msg"></p>
+        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    </div>
+    <script src="../intelxdk.js"></script>
+    <script src="../cordova.js"></script>
+    <script src="../xhr.js"></script>
+    <script src="../js/inventor/Inventor.min.js"></script>
+    <script src="../js/inventor/InventorMobile.min.js"></script>
+    <script>
+
+        //atributes
+        var localHost = 'http://localhost:9000';
+        var inviteFriendsForm = new Form(document.getElementById('invite-friends-form'));
+        var successPopup = new Popup(document.getElementById('success-popup'));
+        var beforeSendPopup = new Popup(document.getElementById('before-send-popup'));
+        var errorPopup = new Popup(document.getElementById('error-popup'));
+        var generalErrorPopup = new Popup(document.getElementById('general-error-popup'));
+        var host = window.localStorage.getItem('host');
+        var successResponse = "OK";
+
+        //device onready
+        function onDeviceReady() {
+            init();
+        }
+        document.addEventListener("deviceready", onDeviceReady, false);
+        // for local work in web broswers
+        //not working on device test app
+        /*if (host === localHost) {
+            init();
+        }*/
+        init();
+        //declare init
+        function init() {
+            initNav();
+        }
+        //invite friends
+        inviteFriendsForm.onsubmit(function () {
+            if (inviteFriendsForm.isValid()) {
+                var partner = JSON.parse(window.localStorage.getItem('partner'));
+                document.getElementById('name-partner').value = partner.name;
+                document.getElementById('email-partner').value = partner.email;
+                var inviteFriendsXHR = new XHR('POST', host + '/inviteFriends');
+                inviteFriendsXHR.setContentType('application/x-www-form-urlencoded;charset=UTF-8');
+                inviteFriendsXHR.onBeforeSend(function () {
+                    beforeSendPopup.show();
+                });
+                inviteFriendsXHR.onReady(function (xhr) {
+                    beforeSendPopup.close();
+                    var response = xhr.responseText;
+                    if (response === successResponse) {
+                        successPopup.show();
+                    } else {
+                        document.getElementById('general-error-msg').textContent = response;
+                        generalErrorPopup.show();
+                    }
+                });
+                inviteFriendsXHR.onError(function (xhr) {
+                    beforeSendPopup.close();
+                    document.getElementById('error-msg').textContent = xhr.statusText;
+                    errorPopup.show();
+                });
+                inviteFriendsXHR.send(inviteFriendsForm.serialize());
+            }
+        });
+        //nav
+        function initNav() {
+            document.getElementById('nav-app').style.height = Utils.getWindowMaxHeight() + 'px';
+        }
+
+        function toggleNav() {
+            var nav = document.getElementById('nav-app');
+            nav.classList.toggle('hidden');
+        }
+        function hiddenNav() {
+            var nav = document.getElementById('nav-app');
+            if (!nav.classList.contains('hidden')) {
+                nav.classList.add('hidden');
+            }
+        }
+        function singOut() {
+            window.localStorage.clear();
+            window.localStorage.setItem("user-is-register", 1);
+            window.location = '../index.html';
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

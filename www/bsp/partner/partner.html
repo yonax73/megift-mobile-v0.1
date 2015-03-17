@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Megift App Gift User</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
+    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
+</head>
+<body class="i-ease-in i-1s i-fade-in">
+
+    <div class="content-main">
+        <div id="nav-app" class="nav-app  hidden ">
+            <div class="list-group">
+                <a class="list-group-item list-group-item active" href="#" onclick="toggleNav()">
+                    <i class="fa fa-user fa-fw fa-2x"></i>&nbsp; Mi Perfil
+                </a>
+                <a class="list-group-item list-group-item active" href="../gift/search-gift.html" rel="external">
+                    <i class="fa fa-gift fa-fw fa-2x"></i>&nbsp; Buscar regalos
+                </a>
+                <a class="list-group-item list-group-item active" href="../../social/inviteFriends.html" rel="external">
+                    <i class="fa fa-share-alt fa-fw fa-2x"></i>&nbsp; Invitar amigos
+                </a>
+                <a class="list-group-item list-group-item active" href="../../sec/settings/settings.html" rel="external">
+                    <i class="fa fa-wrench fa-fw fa-2x"></i>&nbsp; Ajustes
+                </a>
+                <a class="list-group-item list-group-item active" href="../../sec/login/help.html" rel="external">
+                    <i class="fa fa-info-circle fa-fw fa-2x"></i>&nbsp; Ayuda
+                </a>
+                <a class="list-group-item list-group-item active" href="#" onclick="singOut()">
+                    <i class="fa fa-sign-out fa-fw fa-2x"></i>&nbsp; Cerrar sesión
+                </a>
+            </div>
+        </div>
+        <div class="content-app">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header" onclick="toggleNav()">
+                        <span class="navbar-brand">
+                            <i class="fa fa-bars"></i>
+                        </span>
+                        <p class="navbar-text">Mi perfil</p>
+                    </div>
+                </div>
+            </nav>
+            <section class="container-fluid" onclick="hiddenNav()">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="list-group text-center">
+                            <li class="list-group-item">
+                                <img src="../../images/unknown-user.png" class="image-partner img-circle" id="image-partner" />
+                            </li>
+                            <li class="list-group-item">
+                                <strong id="name-partner"></strong><br />
+                                <span id="gender-partner"></span>
+                            </li>
+                            <li class="list-group-item" id="birthday-partner"></li>
+                            <li class="list-group-item" id="city-partner"><span id="couuntry-partner"></span></li>
+                            <li class="list-group-item" id="email-partner"></li>
+                        </ul>
+                        <a href="partner-update.html" rel="external" class="btn btn-success btn-lg btn-block">Editar</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="../../intelxdk.js"></script>
+    <script src="../../cordova.js"></script>
+    <script src="../../xhr.js"></script>
+    <script src="../../js/inventor/Inventor.min.js"></script>
+    <script src="../../js/inventor/InventorMobile.min.js"></script>
+    <script>
+        var localHost = 'http://localhost:9000';
+        //atributes
+        var successResponse = "OK";
+        var host = window.localStorage.getItem('host');
+        var idLogin = window.localStorage.getItem('id-login');
+        var FEMALE = 1;
+        var MALE = 2;
+        //atributes user
+        var imagePartner = document.getElementById('image-partner');
+        var namePartner = document.getElementById('name-partner');
+        var genderPartner = document.getElementById('gender-partner');
+        var birthdayPartner = document.getElementById('birthday-partner');
+        var cityPartner = document.getElementById('city-partner');
+        var emailPartner = document.getElementById('email-partner');
+        //device ready
+        function onDeviceReady() {
+            init();
+        }
+        document.addEventListener("deviceready", onDeviceReady, false);
+        // for local work in web broswers
+        //not working on device test app
+        /*if (host === localHost) {
+            init();
+        }*/
+        init();
+        //declare init
+        function init() {
+            initNav();
+            loadPartner();
+        }
+
+        //load partner
+        function loadPartner() {
+            XHR.byPost('id-login=' + idLogin, host + '/loadPartner', null, function (xhr) {
+                var partner = JSON.parse(xhr.responseText);
+                window.localStorage.setItem('partner', JSON.stringify(partner));
+                namePartner.textContent = partner.fullName;
+                genderPartner.textContent = partner.gender.id === FEMALE ? 'Mujer' : partner.gender.id === MALE ? 'Hombre' : '';
+                birthdayPartner.textContent = partner.birthday === null ? '' : partner.formatBirthday;
+                cityPartner.textContent = partner.location.address === null ? '' : partner.location.address.city.city;
+                emailPartner.textContent = partner.login.email;
+                if (partner.picture.id > 0) {
+                    imagePartner.src = partner.picture.dataURI;
+                }
+            });
+        }
+
+        function initNav() {
+            document.getElementById('nav-app').style.height = Utils.getWindowMaxHeight() + 'px';
+        }
+        function toggleNav() {
+            var nav = document.getElementById('nav-app');
+            nav.classList.toggle('hidden');
+        }
+        function hiddenNav() {
+            var nav = document.getElementById('nav-app');
+            if (!nav.classList.contains('hidden')) {
+                nav.classList.add('hidden');
+            }
+        }
+        function singOut() {
+            window.localStorage.clear();
+            window.localStorage.setItem("user-is-register", 1);
+            window.location = '../../index.html';
+        }
+    </script>
+</body>
+</html>
