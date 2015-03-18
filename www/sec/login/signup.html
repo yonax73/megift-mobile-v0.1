@@ -4,146 +4,313 @@
     <title>Megift App Sign up</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
-
+    <link href="../../public/css/inventor/animations.min.css" rel="stylesheet" />
+    <link href="../../public/materialize/css/materialize.min.css" rel="stylesheet" />
+    <link href="../../public/css/app.min.css" rel="stylesheet" />
 </head>
 <body class="i-ease-in i-1s i-fade-in">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <span class="navbar-brand ">
-                    <img src="../../../icon.png">
-                </span>
-                <p class="navbar-text">Crea tu perfil de regalo.</p>
-            </div>
+
+    <nav class="deep-orange" role="navigation">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo brand-logo-s truncate">
+                Crea tú perfil de regalo
+            </a>
+            <ul id="nav-mobile" class="side-nav">
+                <li class="logo-nav-open deep-orange">
+                    <img src="../../public/images/logo-full-216x96.png" />
+                </li>
+                <li>
+                    <a href="login.html" rel="external">
+                        <i class="mdi-action-assignment-return deep-orange-500-text left"></i>
+                        Ingresar
+                    </a>
+                </li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="mdi-navigation-menu"></i>
+            </a>
         </div>
     </nav>
-    <section class="container-fluid">
+    <div id="preloader" class="progress-deep-orange progress hidden">
+        <div class="progress-deep-orange indeterminate"></div>
+    </div>
+    <section class="container m-top-1rem">
         <div class="row">
-            <div class="col-sm-12">
-                <p>Por favor completa la siguiente informaci&oacute;n para crear tu perfil.</p>
+            <div class="s12">
+                <p>Por favor completa la siguiente información para crear tu perfil.</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
-                <form id="signup-form" class="form-horizontal">
-                    <div class="form-group has-feedback">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control input-lg" id="name-partner" name="name-partner" data-name="true" placeholder="Nombre Completo">
-                            <span class="form-control-feedback"></span>
-                            <small class="i-form-error-msg text-danger hidden">El nombre es requerido!</small>
-                        </div>
+            <form id="signup-form" class="col s12 m12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="mdi-social-person prefix"></i>
+                        <input id="name-partner" name="name-partner" type="text" class="validate">
+                        <label for="name-partner">Nombre Completo</label>
                     </div>
-                    <div class="form-group has-feedback">
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control input-lg" id="email-partner" name="email-partner" data-email="true" placeholder="Correo Electrónico">
-                            <span class="form-control-feedback"></span>
-                            <small class="i-form-error-msg text-danger hidden">El correo es requerido!</small>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="mdi-communication-email prefix"></i>
+                        <input id="email-partner" name="email-partner" type="text" class="validate">
+                        <label for="email-partner">Correo Electrónico</label>
                     </div>
-                    <div class="form-group has-feedback">
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control input-lg" name="password-partner" data-required="true" placeholder="Contraseña">
-                            <span class="form-control-feedback"></span>
-                            <small class="i-form-error-msg text-danger hidden">La contrase&ntilde;a es requerida!</small>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="mdi-action-lock prefix"></i>
+                        <input id="password-partner" name="password-partner" type="password" class="validate">
+                        <label for="password-partner">Contraseña </label>
                     </div>
-                    <div class="form-group has-feedback">
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control input-lg" data-required="true" data-equalsto="password-partner" placeholder="Confirmar Contraseña">
-                            <span class="form-control-feedback"></span>
-                            <small class="i-form-error-msg text-danger hidden">La contrase&ntilde;a no coincide!</small>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="mdi-action-lock prefix"></i>
+                        <input id="password-partner-2"  type="password" class="validate">
+                        <label for="password-partner-2">Confirmar Contraseña </label>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <h6>
-                                Al hacer clic en continuar aceptas las
-                                <a href="termsAndConditions.html" rel="external">condiciones</a>
-                                y que has le&iacute;do las
-                                <a href="privacyPolicy.html" rel="external">pol&iacute;ticas de privacidad</a>
-                            </h6>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <small>
+                            Al hacer clic en continuar aceptas las
+                            <a href="termsAndConditions.html" rel="external">condiciones</a>
+                            y que has le&iacute;do las
+                            <a href="privacyPolicy.html" rel="external">pol&iacute;ticas de privacidad</a>
+                        </small>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success btn-lg btn-block">Continuar</button>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <button id="submit-form" class="btn waves-effect waves-light btn-large btn-fluid" type="submit">
+                            Continuar<i class="mdi-content-send right"></i>
+                        </button>
                     </div>
-                </form>
-                <a href="login.html" rel="external">Ya tengo una cuenta.! Ingresa aqu&iacute;.</a>
-            </div>
+                </div>
+            </form>
         </div>
     </section>
-    <div class="i-popup-mask hidden"></div>
-    <div id="before-send-popup" class="i-popup-panel i-popup-primary hidden text-primary text-center">
-        <h4><i class=" fa fa-spinner fa-pulse fa-5x"></i></h4>
-        <h5>Enviando, por favor espera...</h5>
+    <!-- Modal error -->
+    <div id="modal-error" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Error!</h4>
+            <p><strong id="error-msg"></strong>. intentalo nuevamente!</p>
+            <p>Si el error persiste puedes contactarnos a <span class="red-500-text"><strong>soporte@megift.co</strong></span></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn waves-effect waves-green btn-flat modal-action modal-close">Aceptar</a>
+        </div>
     </div>
-    <div id="error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
-        <p>Lo siento, ha ocurrido un error(<span id="error-msg"></span>), intentalo nuevamente!</p>
-        <p>Si el error persiste puedes contactarnos a <span class="text-danger"><strong>soporte@megift.co</strong></span></p>
-        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    <!-- Modal success -->
+    <div id="modal-success" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h3>Bienvenido</h3>
+            <h4>Tu cuenta ha sido creada con éxito</h4>
+        </div>
+        <div class="modal-footer">
+            <a href="../../social/sendInvitationsControl.html" rel="external" class="btn waves-effect waves-green btn-flat modal-action">Aceptar</a>
+        </div>
     </div>
-    <div id="general-error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
-        <p id="general-error-msg"></p>
-        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
-    </div>
-    <div id="success-popup" class="i-popup-panel i-popup-success hidden text-justify">
-        <h3>Bienvenido</h3>
-        <h4>Tu cuenta ha sido creada con éxito</h4>
-        <a href="../../social/sendInvitationsControl.html" rel="external" class="btn btn-success btn-lg btn-block">Aceptar</a>
-    </div>
-
     <script src="../../intelxdk.js"></script>
     <script src="../../cordova.js"></script>
     <script src="../../xhr.js"></script>
-    <script src="../../js/inventor/Inventor.min.js"></script>
-    <script src="../../js/inventor/InventorMobile.min.js"></script>
+    <script src="../../public/js/jquery.min.js"></script>
+    <script src="../../public/materialize/js/materialize.min.js"></script>
+    <script src="../../public/js/inventor/BaseForm.min.js"></script>
+
     <script>
+        var host = window.localStorage.getItem('host');
         function onDeviceReady() {
+            init();
         }
         document.addEventListener("deviceready", onDeviceReady, false);
-        //atributes
-        var successResponse = "OK";
-        var host = window.localStorage.getItem('host');
-        var beforeSendPopup = new Popup(document.getElementById('before-send-popup'));
-        var errorPopup = new Popup(document.getElementById('error-popup'));
-        var successPopup = new Popup(document.getElementById('success-popup'));
-        var generalErrorPopup = new Popup(document.getElementById('general-error-popup'));
-        var form = new Form(document.getElementById('signup-form'));
-        //signup form
-        form.onsubmit(function () {
-            if (form.isValid()) {
-                XHR.byPost(form.serialize(), host + '/createAccount', function () {
-                    beforeSendPopup.show();
-                }, function (xhr) {
-                    beforeSendPopup.close();
-                    var response = xhr.responseText;
-                    if (response > 0) {
-                        var partner = {};
-                        partner.name = document.getElementById('name-partner').value;
-                        partner.email = document.getElementById('email-partner').value;
-                        window.localStorage.setItem('id-login', response);
-                        window.localStorage.setItem('partner', JSON.stringify(partner));
-                        window.localStorage.setItem('show-menu',false);
-                        successPopup.show();
-                    } else {
-                        document.getElementById('general-error-msg').textContent = response;
-                        generalErrorPopup.show();
+        init();
+        //function init
+        function init() {
+            // Initialize collapse button
+            $(".button-collapse").sideNav();
+        }
+        /*
+        * submit form
+        */
+        $("#signup-form").submit(function (e) {
+            e.preventDefault();
+            var valid = new Array();
+            var result = false;
+            //valid name
+            var name = document.getElementById('name-partner');
+            if (BaseForm.isFullName(name.value)) {
+                if (name.classList.contains('invalid')) {
+                    name.classList.remove('invalid');
+                    name.classList.add('valid');
+                }
+                result = true;
+            } else {
+                if (!name.classList.contains('invalid')) {
+                    name.classList.remove('valid');
+                    name.classList.add('invalid');
+                }
+                toast('Ingrese un nombre válido!', 8000, 'toast-danger');
+                result = false;
+            }
+            valid.push(result ? 1 : 0);
+            //valid email
+            var email = document.getElementById('email-partner');
+            if (BaseForm.isEmail(email.value)) {
+                if (email.classList.contains('invalid')) {
+                    email.classList.remove('invalid');
+                }
+                result = true;
+            } else {
+                if (!email.classList.contains('invalid')) {
+                    email.classList.remove('valid');
+                    email.classList.add('invalid');
+                }
+                toast('Ingrese un correo válido!', 8000, 'toast-danger');
+                result = false;
+            }
+            valid.push(result ? 1 : 0);
+            //valid password
+            var password = document.getElementById('password-partner');
+            if (!BaseForm.isEmpty(password.value)) {
+                if (password.classList.contains('invalid')) {
+                    password.classList.remove('invalid');
+                    password.classList.add('valid');
+                }
+                result = true;
+            } else {
+                if (!password.classList.contains('invalid')) {
+                    password.classList.remove('valid');
+                    password.classList.add('invalid');
+                }
+                toast('Ingrese contraseña!', 8000, 'toast-danger');
+                result = false;
+            }
+            valid.push(result ? 1 : 0);
+            //valid password confirm required
+            var password2 = document.getElementById('password-partner-2');
+            if (!BaseForm.isEmpty(password2.value)) {
+                if (password2.classList.contains('invalid')) {
+                    password2.classList.remove('invalid');
+                    password2.classList.add('valid');
+                }
+                result = true;
+            } else {
+                if (!password2.classList.contains('invalid')) {
+                    password2.classList.remove('valid');
+                    password2.classList.add('invalid');
+                }
+                toast('Confirme contraseña!', 8000, 'toast-danger');
+                result = false;
+            }
+            //valid password equals            
+            if (!BaseForm.isEmpty(password2.value)) {
+                if (password2.classList.contains('invalid')) {
+                    password2.classList.remove('invalid');
+                    password2.classList.add('valid');
+                }
+                result = true;
+            } else {
+                if (!password2.classList.contains('invalid')) {
+                    password2.classList.remove('valid');
+                    password2.classList.add('invalid');
+                }
+                toast('Confirme contraseña!', 8000, 'toast-danger');
+                result = false;
+            }
+            //validar que las dos contraseñas sean iguales
+            if (BaseForm.isEqualsTo(password.value, password2.value)) {
+                if (password2.classList.contains('invalid')) {
+                    password2.classList.remove('invalid');
+                    password2.classList.add('valid');
+                }
+                result = true;
+            } else {
+                if (!password2.classList.contains('invalid')) {
+                    password2.classList.remove('valid');
+                    password2.classList.add('invalid');
+                }
+                toast('La contraseña no coincide!', 8000, 'toast-danger');
+                result = false;
+            }
+            valid.push(result ? 1 : 0);
+            //check validations
+            var n = valid.length;
+            var isvalid = true;
+            var i = 0;
+            if (n > 0) {
+                do {
+                    isvalid = valid[i++] > 0;
+                } while (isvalid && i < n)
+            }
+            if (isvalid) {
+                //send form
+                $.ajax({
+                    type: 'POST',
+                    url: host + '/createAccount',
+                    data: $('#signup-form').serialize(),
+                    beforeSend: function () {
+                        showPreloader();
+                        disabledFormControls();
+                    },
+                    success: function (response) {
+                        hiddenPreloader();
+                        enabledFormControls();
+                        if (response > 0) {
+                            var partner = {};
+                            partner.name = document.getElementById('name-partner').value;
+                            partner.email = document.getElementById('email-partner').value;
+                            window.localStorage.setItem('id-login', response);
+                            window.localStorage.setItem('partner', JSON.stringify(partner));
+                            window.localStorage.setItem('show-menu', false);
+                            $('#modal-success').openModal();
+                        } else {
+                            toast(response, 8000, 'toast-danger');
+                        }
+                    },
+                    error: function (xhr) {
+                        hiddenPreloader();
+                        enabledFormControls();
+                        console.log(xhr);
+                        document.getElementById('error-msg').textContent = xhr.responseText;
+                        $('#modal-error').openModal();
                     }
-                }, function (xhr) {
-                    beforeSendPopup.close();
-                    document.getElementById('error-msg').textContent = xhr.statusText;
-                    errorPopup.show();
                 });
             }
         });
 
+        /*
+        * Mostrar preloader
+        */
+        function showPreloader() {
+            var preloader = document.getElementById('preloader');
+            if (preloader.classList.contains('hidden')) {
+                preloader.classList.remove('hidden');
+            }
+        }
+        /*
+        * Esconder preloader
+        */
+        function hiddenPreloader() {
+            var preloader = document.getElementById('preloader');
+            if (!preloader.classList.contains('hidden')) {
+                preloader.classList.add('hidden');
+            }
+        }
+        /*
+        * disbled Form Controls
+        */
+        function disabledFormControls() {
+            var submitFormBtn = document.getElementById('submit-form');
+            submitFormBtn.disabled = true;
+        }
+        /*
+        * Enabled Form Controls
+        */
+        function enabledFormControls() {
+            var submitFormBtn = document.getElementById('submit-form');
+            submitFormBtn.disabled = false;
+        }
     </script>
 </body>
-
 </html>
