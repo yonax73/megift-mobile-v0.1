@@ -6,11 +6,9 @@
     overflow-x: hidden;
 }
 
-.logo-center {
-  display: table;
-  margin: 50% auto;
-  padding-top: 0;
-  border-radius: 64px;
+.logo-full-header {
+    margin-top: 2%;
+    max-width: 35%;
 }
 
 /*COVER BLOCK*/
@@ -280,26 +278,42 @@
         width: 100vw;
     }
 /**Refactoring materialize*/
-.simple-nav{
-    background-color:transparent;
-    box-shadow:none;
+.simple-nav {
+    background-color: transparent;
+    box-shadow: none;
+    margin-bottom: 1%;
+    margin-top: 1%;
 }
+
 /*Helper class for materialize*/
-.btn-fluid{
-      width: 100%;
+.btn-fluid {
+    margin: 0;
+    width: 100%;
+}
+
+.card .card-action-s {
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 /*
 * palete color text inspired by
 * http://www.google.com/design/spec/style/color.html#color-color-palette
 */
 /*gray*/
-.gray-800-text{
-    color:#424242;
+a.gray-800-text ,
+.gray-800-text {
+    color: #424242;
 }
+
 a.gray-800-text {
-    color:#424242;
+    color: #424242;
 }
 /*red*/
-a.red-500-text{
-    color:#F44336;
+a.red-500-text {
+    color: #F44336;
+}
+/*deep orange*/
+a.deep-orange-500-text,
+.deep-orange-500-text {
+    color: #FF5722;
 }
