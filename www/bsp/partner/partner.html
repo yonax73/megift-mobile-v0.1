@@ -61,16 +61,13 @@
             </a>
         </div>
     </nav>
-    <div id="preloader" class="progress-deep-orange progress hidden">
-        <div class="progress-deep-orange indeterminate"></div>
-    </div>
-    <div class="container container-fluid deep-orange m-top-1rem">
+
+    <div class="container container-fluid deep-orange m-top-1rem separator-gray-300">
         <img class="image-fluid" id="image-partner" src="../../public/images/avatar-user.png" />
         <div class="front-content transparent-bg">
             <p class="flow-text" id="name-partner">
                 Nombre de usuario avatar
             </p>
-
         </div>
         <div id="update-partner-content" class="fixed-action-btn">
             <a href="partner-update.html" rel="external" class="btn btn-floating btn-large waves-effect waves-light deep-orange">
@@ -78,19 +75,77 @@
             </a>
         </div>
     </div>
+    <div id="preloader" class="progress-deep-orange progress hidden">
+        <div class="progress-deep-orange indeterminate"></div>
+    </div>
     <div class="container flow-text">
         <div class="row">
             <div class="col s12 ">
                 <p class="separator-gray-300">
-                    <i class="fa fa-transgender deep-orange-500-text">&nbsp;</i>
+                    <i class="fa fa-envelope-o deep-orange-500-text">
+                        &nbsp;&nbsp;
+                    </i>
+                    <span id="email-partner">
+                        yonax73@gmail.com
+                    </span>
+                    <br />
+                    <small class="grey-text">
+                        Correo Electrónico
+                    </small>
+                </p>
+                <p class="separator-gray-300">
+                    <i class="fa fa-transgender deep-orange-500-text">
+                        &nbsp;&nbsp;
+                    </i>
                     <span id="gender-partner">
                         Mujer
                     </span>
                     <br />
-                    <small class="grey-text">Sexo</small>
+                    <small class="grey-text">
+                        Sexo
+                    </small>
+                </p>
+                <p class="separator-gray-300">
+                    <i class="fa fa-birthday-cake deep-orange-500-text">
+                        &nbsp;&nbsp;
+                    </i>
+                    <span id="birthday-partner">
+                        11-05-1988
+                    </span>
+                    <br />
+                    <small class="grey-text">
+                        Fecha de nacimiento
+                    </small>
+                </p>
+                <p class="separator-gray-300">
+                    <i class="fa fa-globe deep-orange-500-text">
+                        &nbsp;&nbsp;
+                    </i>
+                    <span id="city-partner">
+                        Medellin
+                    </span>
+                    <span class="hidden">,</span>
+                    <span id="couuntry-partner" class="hidden">
+                        Colombia
+                    </span>
+                    <br />
+                    <small class="grey-text">
+                        Ubicación
+                    </small>
                 </p>
 
             </div>
+        </div>
+    </div>
+    <!-- Modal error -->
+    <div id="modal-error" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Error!</h4>
+            <p><strong id="error-msg"></strong>. intentalo nuevamente!</p>
+            <p>Si el error persiste puedes contactarnos a <span class="red-500-text"><strong>soporte@megift.co</strong></span></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn waves-effect waves-green btn-flat modal-action modal-close">Aceptar</a>
         </div>
     </div>
     <script src="../../intelxdk.js"></script>
@@ -100,6 +155,9 @@
     <script src="../../public/materialize/js/materialize.min.js"></script>
     <script>
         var host = window.localStorage.getItem('host');
+        var idLogin = window.localStorage.getItem('id-login');
+        var FEMALE = 1;
+        var MALE = 2;
         function onDeviceReady() {
             init();
         }
@@ -109,96 +167,78 @@
         function init() {
             // Initialize collapse button
             $(".button-collapse").sideNav();
-        }
-    </script>
-
-    <!--<div class="content-main">
-    >
-                            <li class="list-group-item">
-                                <strong id="name-partner"></strong><br />
-                                <span id="gender-partner"></span>
-                            </li>
-                            <li class="list-group-item" id="birthday-partner"></li>
-                            <li class="list-group-item" id="city-partner"><span id="couuntry-partner"></span></li>
-                            <li class="list-group-item" id="email-partner"></li>
-                        </ul>
-                        <a href="partner-update.html" rel="external" class="btn btn-success btn-lg btn-block">Editar</a>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-    <script src="../../intelxdk.js"></script>
-    <script src="../../cordova.js"></script>
-    <script src="../../xhr.js"></script>
-    <script src="../../js/inventor/Inventor.min.js"></script>
-    <script src="../../js/inventor/InventorMobile.min.js"></script>
-    <script>
-        var localHost = 'http://localhost:9000';
-        //atributes
-        var successResponse = "OK";
-        var host = window.localStorage.getItem('host');
-        var idLogin = window.localStorage.getItem('id-login');
-        var FEMALE = 1;
-        var MALE = 2;
-        //atributes user
-        var imagePartner = document.getElementById('image-partner');
-        var namePartner = document.getElementById('name-partner');
-        var genderPartner = document.getElementById('gender-partner');
-        var birthdayPartner = document.getElementById('birthday-partner');
-        var cityPartner = document.getElementById('city-partner');
-        var emailPartner = document.getElementById('email-partner');
-        //device ready
-        function onDeviceReady() {
-            init();
-        }
-        document.addEventListener("deviceready", onDeviceReady, false);
-        // for local work in web broswers
-        //not working on device test app
-        /*if (host === localHost) {
-            init();
-        }*/
-        init();
-        //declare init
-        function init() {
-            initNav();
+            //Load partner
             loadPartner();
         }
-
         //load partner
         function loadPartner() {
-            XHR.byPost('id-login=' + idLogin, host + '/loadPartner', null, function (xhr) {
-                var partner = JSON.parse(xhr.responseText);
-                window.localStorage.setItem('partner', JSON.stringify(partner));
-                namePartner.textContent = partner.fullName;
-                genderPartner.textContent = partner.gender.id === FEMALE ? 'Mujer' : partner.gender.id === MALE ? 'Hombre' : '';
-                birthdayPartner.textContent = partner.birthday === null ? '' : partner.formatBirthday;
-                cityPartner.textContent = partner.location.address === null ? '' : partner.location.address.city.city;
-                emailPartner.textContent = partner.login.email;
-                if (partner.picture.id > 0) {
-                    imagePartner.src = partner.picture.dataURI;
+            $.ajax({
+                type: 'POST',
+                url: host + '/loadPartner',
+                data: 'id-login=' + idLogin,
+                beforeSend: function () {
+                    showPreloader();
+                },
+                success: function (response) {
+                    hiddenPreloader();
+                    try {
+                        //atributes
+                        var partner = JSON.parse(response);
+                        var imagePartner = document.getElementById('image-partner');
+                        var namePartner = document.getElementById('name-partner');
+                        var genderPartner = document.getElementById('gender-partner');
+                        var birthdayPartner = document.getElementById('birthday-partner');
+                        var cityPartner = document.getElementById('city-partner');
+                        var emailPartner = document.getElementById('email-partner');
+                        //set
+                        window.localStorage.setItem('partner', JSON.stringify(partner));
+                        namePartner.textContent = partner.fullName;
+                        genderPartner.textContent = partner.gender.id === FEMALE ? 'Mujer' : partner.gender.id === MALE ? 'Hombre' : '';
+                        birthdayPartner.textContent = partner.birthday === null ? '' : partner.formatBirthday;
+                        cityPartner.textContent = partner.location.address === null ? '' : partner.location.address.city.city;
+                        emailPartner.textContent = partner.login.email;
+                        if (partner.picture.id > 0) {
+                            imagePartner.src = partner.picture.dataURI;
+                        }
+                    } catch (ex) {
+                        toast(response, 8000, 'toast-danger');
+                    }
+                },
+                error: function (xhr) {
+                    hiddenPreloader();
+                    document.getElementById('error-msg').textContent = xhr.responseText;
+                    $('#modal-error').openModal();
                 }
             });
         }
-
-        function initNav() {
-            document.getElementById('nav-app').style.height = Utils.getWindowMaxHeight() + 'px';
-        }
-        function toggleNav() {
-            var nav = document.getElementById('nav-app');
-            nav.classList.toggle('hidden');
-        }
-        function hiddenNav() {
-            var nav = document.getElementById('nav-app');
-            if (!nav.classList.contains('hidden')) {
-                nav.classList.add('hidden');
+        /*
+        * Mostrar preloader
+        */
+        function showPreloader() {
+            var preloader = document.getElementById('preloader');
+            if (preloader.classList.contains('hidden')) {
+                preloader.classList.remove('hidden');
             }
         }
+        /*
+        * Esconder preloader
+        */
+        function hiddenPreloader() {
+            var preloader = document.getElementById('preloader');
+            if (!preloader.classList.contains('hidden')) {
+                preloader.classList.add('hidden');
+            }
+        }
+        /*
+        * Sign out
+        */
         function singOut() {
             window.localStorage.clear();
             window.localStorage.setItem("user-is-register", 1);
             window.location = '../../index.html';
         }
-    </script>-->
+    </script>
+
+
 </body>
 </html>

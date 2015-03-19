@@ -443,7 +443,8 @@ a.deep-orange-500-text,
         }
 /*ID FOR sendInvitationsControl*/
 #invite-friend-content,
-#update-partner-content {
+#update-partner-content,
+#picture-partner-content {
     position: absolute;
     bottom: -35px;
 }
