@@ -356,6 +356,21 @@ a.deep-orange-500-text,
 .separator-deep-orange-500 {
     border-bottom: 1px solid #FF5722;
 }
+/*********************************
+ ***** SOCIAL COLORS *************
+**********************************/
+/*OUTLOOK*/
+.outlook-bg {
+    background-color: #094ab1;
+}
+/*GMAIL COLOR*/
+.gmail-bg {
+    background-color: #ff002b;
+}
+/*YAHOO COLOR*/
+.yahoo-bg {
+    background-color: #7B0099;
+}
 /*progress deep orange*/
 .progress.progress-deep-orange {
     background-color: #FFCCBC;
@@ -369,7 +384,13 @@ a.deep-orange-500-text,
     border-bottom: 1px solid #FF5722;
     box-shadow: 0 1px 0 0 #FF5722;
 }
-/*helpers*/
+/************************************/
+/******** HELPERS *******************/
+/************************************/
+.row.social-media-content div {
+    padding: 1px;
+}
+
 .hidden {
     display: none;
 }
@@ -388,6 +409,7 @@ a.deep-orange-500-text,
 }
 
 .image-fluid {
+    display: table;
     width: 100vw;
 }
 
@@ -400,15 +422,28 @@ a.deep-orange-500-text,
 
 .front-content {
     position: absolute;
-    bottom: 6px;
+    bottom: 0;
     color: #fff;
     padding-left: 10px;
     font-size: 20px;
     width: 100%;
     background-color: rgba(0,0,0,.4);
 }
+
+    .front-content.transparent-bg {
+        background-color: transparent;
+        bottom: 14px;
+        text-align: center;
+    }
+
+        .front-content.transparent-bg p {
+            font-size: 130%;
+            font-weight: bolder;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.45);
+        }
 /*ID FOR sendInvitationsControl*/
-#invite-friend-content {
+#invite-friend-content,
+#update-partner-content {
     position: absolute;
     bottom: -35px;
 }

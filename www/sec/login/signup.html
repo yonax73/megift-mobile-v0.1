@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="mdi-action-lock prefix"></i>
-                        <input id="password-partner-2"  type="password" class="validate">
+                        <input id="password-partner-2" type="password" class="validate">
                         <label for="password-partner-2">Confirmar Contraseña </label>
                     </div>
                 </div>
@@ -203,7 +203,7 @@
                 toast('Confirme contraseña!', 8000, 'toast-danger');
                 result = false;
             }
-            //valid password equals            
+            //valid password equals
             if (!BaseForm.isEmpty(password2.value)) {
                 if (password2.classList.contains('invalid')) {
                     password2.classList.remove('invalid');
@@ -271,7 +271,6 @@
                     error: function (xhr) {
                         hiddenPreloader();
                         enabledFormControls();
-                        console.log(xhr);
                         document.getElementById('error-msg').textContent = xhr.responseText;
                         $('#modal-error').openModal();
                     }

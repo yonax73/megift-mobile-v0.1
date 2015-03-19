@@ -4,54 +4,116 @@
     <title>Megift App Gift User</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
+    <link href="../../public/css/inventor/animations.min.css" rel="stylesheet" />
+    <link href="../../public/materialize/css/materialize.min.css" rel="stylesheet" />
+    <link href="../../public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../../public/css/app.min.css" rel="stylesheet" />
 </head>
 <body class="i-ease-in i-1s i-fade-in">
+    <nav class="deep-orange" role="navigation">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo brand-logo-s truncate">
+                Perfil
+            </a>
+            <ul id="nav-mobile" class="side-nav">
+                <li class="logo-nav-open deep-orange">
+                    <img src="../../public/images/logo-full-216x96.png" />
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="mdi-social-person deep-orange-500-text left"></i>
+                        Mi Perfil
+                    </a>
+                </li>
+                <li>
+                    <a href="../../bsp/gift/search-gift.html" rel="external">
+                        <i class="mdi-action-wallet-giftcard deep-orange-500-text left"></i>
+                        Buscar Regalos
+                    </a>
+                </li>
+                <li>
+                    <a href="../../social/inviteFriends.html">
+                        <i class="mdi-social-share deep-orange-500-text left"></i>
+                        Invitar amigos
+                    </a>
+                </li>
+                <li>
+                    <a href="../../sec/settings/settings.html" rel="external">
+                        <i class="mdi-action-settings deep-orange-500-text left"></i>
+                        Ajustes
+                    </a>
+                </li>
+                <li>
+                    <a href="../../sec/login/help.html" rel="external">
+                        <i class="mdi-communication-live-help deep-orange-500-text left"></i>
+                        Ayuda
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="singOut()">
+                        <i class="mdi-action-exit-to-app deep-orange-500-text left"></i>
+                        Cerrar Sesión
+                    </a>
+                </li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="mdi-navigation-menu"></i>
+            </a>
+        </div>
+    </nav>
+    <div id="preloader" class="progress-deep-orange progress hidden">
+        <div class="progress-deep-orange indeterminate"></div>
+    </div>
+    <div class="container container-fluid deep-orange m-top-1rem">
+        <img class="image-fluid" id="image-partner" src="../../public/images/avatar-user.png" />
+        <div class="front-content transparent-bg">
+            <p class="flow-text" id="name-partner">
+                Nombre de usuario avatar
+            </p>
 
-    <div class="content-main">
-        <div id="nav-app" class="nav-app  hidden ">
-            <div class="list-group">
-                <a class="list-group-item list-group-item active" href="#" onclick="toggleNav()">
-                    <i class="fa fa-user fa-fw fa-2x"></i>&nbsp; Mi Perfil
-                </a>
-                <a class="list-group-item list-group-item active" href="../gift/search-gift.html" rel="external">
-                    <i class="fa fa-gift fa-fw fa-2x"></i>&nbsp; Buscar regalos
-                </a>
-                <a class="list-group-item list-group-item active" href="../../social/inviteFriends.html" rel="external">
-                    <i class="fa fa-share-alt fa-fw fa-2x"></i>&nbsp; Invitar amigos
-                </a>
-                <a class="list-group-item list-group-item active" href="../../sec/settings/settings.html" rel="external">
-                    <i class="fa fa-wrench fa-fw fa-2x"></i>&nbsp; Ajustes
-                </a>
-                <a class="list-group-item list-group-item active" href="../../sec/login/help.html" rel="external">
-                    <i class="fa fa-info-circle fa-fw fa-2x"></i>&nbsp; Ayuda
-                </a>
-                <a class="list-group-item list-group-item active" href="#" onclick="singOut()">
-                    <i class="fa fa-sign-out fa-fw fa-2x"></i>&nbsp; Cerrar sesión
-                </a>
+        </div>
+        <div id="update-partner-content" class="fixed-action-btn">
+            <a href="partner-update.html" rel="external" class="btn btn-floating btn-large waves-effect waves-light deep-orange">
+                <i class="mdi-editor-mode-edit"></i>
+            </a>
+        </div>
+    </div>
+    <div class="container flow-text">
+        <div class="row">
+            <div class="col s12 ">
+                <p class="separator-gray-300">
+                    <i class="fa fa-transgender deep-orange-500-text">&nbsp;</i>
+                    <span id="gender-partner">
+                        Mujer
+                    </span>
+                    <br />
+                    <small class="grey-text">Sexo</small>
+                </p>
+
             </div>
         </div>
-        <div class="content-app">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header" onclick="toggleNav()">
-                        <span class="navbar-brand">
-                            <i class="fa fa-bars"></i>
-                        </span>
-                        <p class="navbar-text">Mi perfil</p>
-                    </div>
-                </div>
-            </nav>
-            <section class="container-fluid" onclick="hiddenNav()">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <ul class="list-group text-center">
-                            <li class="list-group-item">
-                                <img src="../../images/unknown-user.png" class="image-partner img-circle" id="image-partner" />
-                            </li>
+    </div>
+    <script src="../../intelxdk.js"></script>
+    <script src="../../cordova.js"></script>
+    <script src="../../xhr.js"></script>
+    <script src="../../public/js/jquery.min.js"></script>
+    <script src="../../public/materialize/js/materialize.min.js"></script>
+    <script>
+        var host = window.localStorage.getItem('host');
+        function onDeviceReady() {
+            init();
+        }
+        document.addEventListener("deviceready", onDeviceReady, false);
+        init();
+        //function init
+        function init() {
+            // Initialize collapse button
+            $(".button-collapse").sideNav();
+        }
+    </script>
+
+    <!--<div class="content-main">
+    >
                             <li class="list-group-item">
                                 <strong id="name-partner"></strong><br />
                                 <span id="gender-partner"></span>
@@ -137,6 +199,6 @@
             window.localStorage.setItem("user-is-register", 1);
             window.location = '../../index.html';
         }
-    </script>
+    </script>-->
 </body>
 </html>

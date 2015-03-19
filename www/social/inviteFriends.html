@@ -7,126 +7,121 @@
     <link href="../public/css/inventor/animations.min.css" rel="stylesheet" />
     <link href="../public/materialize/css/materialize.min.css" rel="stylesheet" />
     <link href="../public/css/app.min.css" rel="stylesheet" />
+
 </head>
 <body class="i-ease-in i-1s i-fade-in">
+    <nav class="deep-orange" role="navigation">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo brand-logo-s">
+                Invitar amigos
+            </a>
+            <ul id="nav-mobile" class="side-nav">
+                <li class="logo-nav-open deep-orange">
+                    <img src="../public/images/logo-full-216x96.png" />
+                </li>
+                <li>
+                    <a href="../bsp/partner/partner.html" rel="external">
+                        <i class="mdi-social-person deep-orange-500-text left"></i>
+                        Mi Perfil
+                    </a>
+                </li>
+                <li>
+                    <a href="../bsp/gift/search-gift.html" rel="external">
+                        <i class="mdi-action-wallet-giftcard deep-orange-500-text left"></i>
+                        Buscar Regalos
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="mdi-social-share deep-orange-500-text left"></i>
+                        Invitar amigos
+                    </a>
+                </li>
+                <li>
+                    <a href="../sec/settings/settings.html" rel="external">
+                        <i class="mdi-action-settings deep-orange-500-text left"></i>
+                        Ajustes
+                    </a>
+                </li>
+                <li>
+                    <a href="../sec/login/help.html" rel="external">
+                        <i class="mdi-communication-live-help deep-orange-500-text left"></i>
+                        Ayuda
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="singOut()">
+                        <i class="mdi-action-exit-to-app deep-orange-500-text left"></i>
+                        Cerrar Sesión
+                    </a>
+                </li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="mdi-navigation-menu"></i>
+            </a>
+        </div>
+    </nav>
 
-    <div class="navbar-fixed">
-        <nav class="deep-orange" role="navigation">
-            <div class="nav-wrapper container">
-                <a href="#" class="brand-logo brand-logo-s">
-                    Invitar amigos
-                </a>
-                <ul id="nav-mobile" class="side-nav">
-                    <li class="logo-nav-open deep-orange">
-                        <img src="../public/images/logo-full-216x96.png" />
-                    </li>
-                    <li>
-                        <a href="../bsp/partner/partner.html" rel="external">
-                            <i class="mdi-social-person deep-orange-500-text left"></i>
-                            Mi Perfil
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../bsp/gift/search-gift.html" rel="external">
-                            <i class="mdi-action-wallet-giftcard deep-orange-500-text left"></i>
-                            Buscar Regalos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" rel="external" onclick="toggleNav()">
-                            <i class="mdi-social-share deep-orange-500-text left"></i>
-                            Invitar amigos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../sec/settings/settings.html" rel="external">
-                            <i class="mdi-action-settings deep-orange-500-text left"></i>
-                            Ajustes
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../sec/login/help.html" rel="external">
-                            <i class="mdi-communication-live-help deep-orange-500-text left"></i>
-                            Ayuda
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" onclick="singOut()">
-                            <i class="mdi-action-exit-to-app deep-orange-500-text left"></i>
-                            Cerrar Sesión
-                        </a>
-                    </li>
-                </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse">
-                    <i class="mdi-navigation-menu"></i>
-                </a>
-            </div>
-        </nav>
-    </div>
     <div id="preloader" class="progress-deep-orange progress hidden">
         <div class="progress-deep-orange indeterminate"></div>
     </div>
     <section class="container">
-        <div class="row">
+        <div class="row m-top-1rem">
             <div class="col s12 m12">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="row">
-                            <div class="col s12">
-                                <h5>Cuentale a dos amigos</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <form id="invite-friends-form" class="col s12">
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="mdi-communication-email prefix"></i>
-                                        <input id="email-friend-1" name="email-friend-1" type="text" class="validate">
-                                        <label for="email-friend-1">Correo Electrónico</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="mdi-communication-email prefix"></i>
-                                        <input id="email-friend-2" name="email-friend-2" type="text" class="validate">
-                                        <label for="email-friend-2">Correo Electrónico</label>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="name-partner" id="name-partner" />
-                                <input type="hidden" name="email-partner" id="email-partner" />
-                                <div class="row">
-                                    <div class="col s12">
-                                        <button id="submit-form" class="btn waves-effect waves-light btn-large btn-fluid" type="submit">
-                                            Invitar<i class="mdi-content-send right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <p class="flow-text">
+                    <strong>Cuentale a dos amigos</strong>
+                </p>
             </div>
         </div>
         <div class="row">
-            <div class="col s12 m12">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="row">
-                            <div class="col s12">
-                                <h5>Ó cuentale a tus amigos de:</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <div class="circle">
-                                    <a class="gmail" href="#">Gmail</a>
-                                    <a class="outlook" href="#">Outlook</a>
-                                    <a class="yahoo" href="#">Yahoo</a>
-                                </div>
-                            </div>
-                        </div>
+            <form id="invite-friends-form" class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="mdi-communication-email prefix"></i>
+                        <input id="email-friend-1" name="email-friend-1" type="text" class="validate">
+                        <label for="email-friend-1">Correo Electrónico</label>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="mdi-communication-email prefix"></i>
+                        <input id="email-friend-2" name="email-friend-2" type="text" class="validate">
+                        <label for="email-friend-2">Correo Electrónico</label>
+                    </div>
+                </div>
+                <input type="hidden" name="name-partner" id="name-partner" />
+                <input type="hidden" name="email-partner" id="email-partner" />
+                <div class="row">
+                    <div class="col s12">
+                        <button id="submit-form" class="btn waves-effect waves-light btn-large btn-fluid" type="submit">
+                            Invitar<i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col s12 m12">
+                <p class="flow-text">
+                    <strong>Ó cuentale a tus amigos de:</strong>
+                </p>
+            </div>
+        </div>
+        <div class="row social-media-content">
+            <div class="col s4">
+                <a href="inviteFriends.html" rel="external" class="btn  btn-large waves-effect waves-light btn-fluid gmail-bg">
+                    <small>Gmail</small>
+                </a>
+            </div>
+            <div class="col s4">
+                <a href="inviteFriends.html" rel="external" class="btn  btn-large waves-effect waves-light btn-fluid outlook-bg">
+                    <small>Hotmail</small>
+                </a>
+            </div>
+            <div class="col s4">
+                <a href="inviteFriends.html" rel="external" class="btn btn-large waves-effect waves-light btn-fluid yahoo-bg">
+                    <small>Yahoo</small>
+                </a>
             </div>
         </div>
     </section>
@@ -158,92 +153,129 @@
     <script src="../xhr.js"></script>
     <script src="../public/js/jquery.min.js"></script>
     <script src="../public/materialize/js/materialize.min.js"></script>
+    <script src="../public/js/inventor/BaseForm.min.js"></script>
     <script>
         var host = window.localStorage.getItem('host');
+        var successResponse = "OK";
         function onDeviceReady() {
             init();
         }
-        document.addEventListener("deviceready", onDeviceReady, false);
+        document.addEventListener('deviceready', onDeviceReady, false);
         init();
         //function init
         function init() {
             // Initialize collapse button
-            $(".button-collapse").sideNav();
+            $('.button-collapse').sideNav();
         }
-        ////atributes
-        //var localHost = 'http://localhost:9000';
-        //var inviteFriendsForm = new Form(document.getElementById('invite-friends-form'));
-        //var successPopup = new Popup(document.getElementById('success-popup'));
-        //var beforeSendPopup = new Popup(document.getElementById('before-send-popup'));
-        //var errorPopup = new Popup(document.getElementById('error-popup'));
-        //var generalErrorPopup = new Popup(document.getElementById('general-error-popup'));
-        //var host = window.localStorage.getItem('host');
-        //var successResponse = "OK";
+        /*
+        * submit form
+        */
+        $('#invite-friends-form').submit(function (e) {
+            e.preventDefault();
+            var result1 = false;
+            //valid email friend 1
+            var friend1 = document.getElementById('email-friend-1');
+            if (BaseForm.isEmail(friend1.value)) {
+                if (friend1.classList.contains('invalid')) {
+                    friend1.classList.remove('invalid');
+                    friend1.classList.add('valid');
+                }
+                result1 = true;
+            } else {
+                if (!friend1.classList.contains('invalid')) {
+                    friend1.classList.remove('valid');
+                    friend1.classList.add('invalid');
+                }
+                toast('Ingrese un correo válido!', 8000, 'toast-danger');
+                result1 = false;
+            }
+            //valid email friend 2
+            var result2 = false;
+            var friend2 = document.getElementById('email-friend-2');
+            if (BaseForm.isEmail(friend1.value)) {
+                if (friend2.classList.contains('invalid')) {
+                    friend2.classList.remove('invalid');
+                    friend2.classList.add('valid');
+                }
+                result2 = true;
+            } else {
+                if (!friend2.classList.contains('invalid')) {
+                    friend2.classList.remove('valid');
+                    friend2.classList.add('invalid');
+                }
+                toast('Ingrese un correo válido!', 8000, 'toast-danger');
+                result2 = false;
+            }
+            if (result1 || result2) {
+                //send form
+                $.ajax({
+                    type: 'POST',
+                    url: host + '/inviteFriends',
+                    data: $('#invite-friends-form').serialize(),
+                    beforeSend: function () {
+                        showPreloader();
+                        disabledFormControls();
+                    },
+                    success: function (response) {
+                        enabledFormControls();
+                        hiddenPreloader();
+                        enabledFormControls();
+                        if (response === successResponse) {
+                            $('#modal-success').openModal();
+                        } else {
+                            toast(response, 8000, 'toast-danger');
+                        }
+                    },
+                    error: function (xhr) {
+                        hiddenPreloader();
+                        enabledFormControls();
+                        document.getElementById('error-msg').textContent = xhr.responseText;
+                        $('#modal-error').openModal();
+                    }
+                });
+            }
+        });
 
-        ////device onready
-        //function onDeviceReady() {
-        //    init();
-        //}
-        //document.addEventListener("deviceready", onDeviceReady, false);
-        //// for local work in web broswers
-        ////not working on device test app
-        ///*if (host === localHost) {
-        //    init();
-        //}*/
-        //init();
-        ////declare init
-        //function init() {
-        //    initNav();
-        //}
-        ////invite friends
-        //inviteFriendsForm.onsubmit(function () {
-        //    if (inviteFriendsForm.isValid()) {
-        //        var partner = JSON.parse(window.localStorage.getItem('partner'));
-        //        document.getElementById('name-partner').value = partner.name;
-        //        document.getElementById('email-partner').value = partner.email;
-        //        var inviteFriendsXHR = new XHR('POST', host + '/inviteFriends');
-        //        inviteFriendsXHR.setContentType('application/x-www-form-urlencoded;charset=UTF-8');
-        //        inviteFriendsXHR.onBeforeSend(function () {
-        //            beforeSendPopup.show();
-        //        });
-        //        inviteFriendsXHR.onReady(function (xhr) {
-        //            beforeSendPopup.close();
-        //            var response = xhr.responseText;
-        //            if (response === successResponse) {
-        //                successPopup.show();
-        //            } else {
-        //                document.getElementById('general-error-msg').textContent = response;
-        //                generalErrorPopup.show();
-        //            }
-        //        });
-        //        inviteFriendsXHR.onError(function (xhr) {
-        //            beforeSendPopup.close();
-        //            document.getElementById('error-msg').textContent = xhr.statusText;
-        //            errorPopup.show();
-        //        });
-        //        inviteFriendsXHR.send(inviteFriendsForm.serialize());
-        //    }
-        //});
-        ////nav
-        //function initNav() {
-        //    document.getElementById('nav-app').style.height = Utils.getWindowMaxHeight() + 'px';
-        //}
-
-        //function toggleNav() {
-        //    var nav = document.getElementById('nav-app');
-        //    nav.classList.toggle('hidden');
-        //}
-        //function hiddenNav() {
-        //    var nav = document.getElementById('nav-app');
-        //    if (!nav.classList.contains('hidden')) {
-        //        nav.classList.add('hidden');
-        //    }
-        //}
-        //function singOut() {
-        //    window.localStorage.clear();
-        //    window.localStorage.setItem("user-is-register", 1);
-        //    window.location = '../index.html';
-        //}
+        /*
+        * Mostrar preloader
+        */
+        function showPreloader() {
+            var preloader = document.getElementById('preloader');
+            if (preloader.classList.contains('hidden')) {
+                preloader.classList.remove('hidden');
+            }
+        }
+        /*
+        * Esconder preloader
+        */
+        function hiddenPreloader() {
+            var preloader = document.getElementById('preloader');
+            if (!preloader.classList.contains('hidden')) {
+                preloader.classList.add('hidden');
+            }
+        }
+        /*
+        * disbled Form Controls
+        */
+        function disabledFormControls() {
+            var submitFormBtn = document.getElementById('submit-form');
+            submitFormBtn.disabled = true;
+        }
+        /*
+        * Enabled Form Controls
+        */
+        function enabledFormControls() {
+            var submitFormBtn = document.getElementById('submit-form');
+            submitFormBtn.disabled = false;
+        }
+        /*
+        * Sign out
+        */
+        function singOut() {
+            window.localStorage.clear();
+            window.localStorage.setItem("user-is-register", 1);
+            window.location = '../index.html';
+        }
 
 
 
