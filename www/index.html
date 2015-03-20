@@ -3,7 +3,7 @@
 <head>
     <title>Megift App</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">   
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href="public/css/inventor/animations.min.css" rel="stylesheet" />
     <link href="public/materialize/css/materialize.min.css" rel="stylesheet" />
     <link href="public/css/app.min.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
     <script src="cordova.js"></script>
     <script src="xhr.js"></script>
     <script>
-       var localHost = 'http://localhost:9000';
+        var localHost = 'http://localhost:9000';
         var productionHost = 'http://megift.co';
         var host = localHost;
         function onDeviceReady() {
@@ -33,12 +33,7 @@
             }
             startApp();
         }
-        // for local work in web broswers
-        //not run in device
-        /*if (host === localHost) {            
-            startApp();
-        }*/
-       startApp();
+        startApp();
         function startApp() {
             window.localStorage.setItem('host', host);
             var userId = window.localStorage.getItem("login-id");
@@ -48,7 +43,7 @@
             } else if (userIsRegister != null && userIsRegister > 0) {
                 window.location = "sec/login/login.html";
             } else {
-                window.location = "sec/login/signup.html";               
+                window.location = "sec/login/signup.html";
             }
         }
         document.addEventListener("deviceready", onDeviceReady, false);

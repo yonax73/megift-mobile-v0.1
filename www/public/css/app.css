@@ -141,13 +141,9 @@
 }
 /*gift search*/
 .btn-gift-search {
-    /*background-color: #ea304a;*/
-    background-color: rgb(38,143,196);
-    border: medium none;
+    border:none;
     border-radius: 90px;
     box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.5);
-    color: #f6a063;
-    font-size: 40px;
     height: 180px;
     width: 180px;
     -webkit-box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.5);
@@ -329,6 +325,12 @@ i.left {
 
 ul.side-nav a {
     color: #000;
+}
+.navbar-actions{
+    
+}
+.navbar-actions i{
+    font-size:1.3rem;
 }
 /*
 * palete color text inspired by

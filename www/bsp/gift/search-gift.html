@@ -4,134 +4,136 @@
     <title>Megift App Gift Search</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
+    <link href="../../public/css/inventor/animations.min.css" rel="stylesheet" />
+    <link href="../../public/materialize/css/materialize.min.css" rel="stylesheet" />
+    <link href="../../public/css/app.min.css" rel="stylesheet" />
 </head>
 
-<body class="i-ease-in i-1s i-fade-in">
-    <div class="content-main">
-        <div id="nav-app" class="nav-app  hidden ">
-            <div class="list-group">
-                <a class="list-group-item list-group-item active" href="../partner/partner.html" rel="external">
-                    <i class="fa fa-user fa-fw fa-2x"></i>&nbsp; Mi Perfil
-                </a>
-                <a class="list-group-item list-group-item active" href="#" onclick="toggleNav()">
-                    <i class="fa fa-gift fa-fw fa-2x"></i>&nbsp; Buscar regalos
-                </a>
-                <a class="list-group-item list-group-item active" href="../../social/inviteFriends.html" rel="external">
-                    <i class="fa fa-share-alt fa-fw fa-2x"></i>&nbsp; Invitar amigos
-                </a>
-                <a class="list-group-item list-group-item active" href="../../sec/settings/settings.html" rel="external">
-                    <i class="fa fa-wrench fa-fw fa-2x"></i>&nbsp; Ajustes
-                </a>
-                <a class="list-group-item list-group-item active" href="../../sec/login/help.html" rel="external">
-                    <i class="fa fa-info-circle fa-fw fa-2x"></i>&nbsp; Ayuda
-                </a>
-                <a class="list-group-item list-group-item active" href="#" onclick="singOut()">
-                    <i class="fa fa-sign-out fa-fw fa-2x"></i>&nbsp; Cerrar sesión
-                </a>
+<body class="i-ease-in i-1s i-fade-in flow-text">
+    <nav class="deep-orange" role="navigation">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo brand-logo-s truncate">
+                Buscar Regalos
+            </a>
+            <ul id="nav-mobile" class="side-nav">
+                <li class="logo-nav-open deep-orange">
+                    <img src="../../public/images/logo-full-216x96.png" />
+                </li>
+                <li>
+                    <a href="../partner/partner.html" rel="external">
+                        <i class="mdi-social-person deep-orange-500-text left"></i>
+                        Mi Perfil
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="mdi-action-wallet-giftcard deep-orange-500-text left"></i>
+                        Buscar Regalos
+                    </a>
+                </li>
+                <li>
+                    <a href="../../social/inviteFriends.html">
+                        <i class="mdi-social-share deep-orange-500-text left"></i>
+                        Invitar amigos
+                    </a>
+                </li>
+                <li>
+                    <a href="../../sec/settings/settings.html" rel="external">
+                        <i class="mdi-action-settings deep-orange-500-text left"></i>
+                        Ajustes
+                    </a>
+                </li>
+                <li>
+                    <a href="../../sec/login/help.html" rel="external">
+                        <i class="mdi-communication-live-help deep-orange-500-text left"></i>
+                        Ayuda
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="singOut()">
+                        <i class="mdi-action-exit-to-app deep-orange-500-text left"></i>
+                        Cerrar Sesión
+                    </a>
+                </li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="mdi-navigation-menu"></i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container m-top-1rem">
+        <div class="row">
+            <div class="col s12 content-gift-search center">
+                <form id="gift-search-form">
+                    <input name="latitude" type="hidden" value="0" />
+                    <input name="longitude" type="hidden" value="0" />
+                    <input name="id-login" type="hidden" value="0" />
+                    <div class="col s12">
+                        <button id="gift-search-btn" type="submit" class="btn btn-gift-search waves-effect waves-circle z-depth-5 red i-ease-in i-2s i-bounce-in">
+                            <img src="../../public/images/gift128x145.png" alt="buscar regalo">
+                        </button>
+                    </div>
+                </form>
+                <strong id="git-search-msg" class="deep-orange-500-text">
+                    Tocame para buscar los regalos que tenemos para ti.
+                </strong>
             </div>
         </div>
-        <div class="content-app">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header" onclick="toggleNav()">
-                        <span class="navbar-brand">
-                            <i class="fa fa-bars"></i>
-                        </span>
-                        <p class="navbar-text">Buscar regalo</p>
-                    </div>
-                </div>
-            </nav>
-            <section class="container-fluid" onclick="hiddenNav()">
-                <div class="row text-center">
-                    <div class="col-sm-12 content-gift-search">
-                        <form id="gift-search-form" class="form-horizontal">
-                            <input name="latitude" type="hidden" value="0" />
-                            <input name="longitude" type="hidden" value="0" />
-                            <input name="id-login" type="hidden" value="0" />
-                            <div class="col-sm-10 form-group">
-                                <button id="gift-search-btn" type="submit" class="btn-gift-search i-ease-in i-2s i-tada">
-                                    <img src="../../images/gift128x145.png" alt="buscar regalo">
-                                </button>
-                            </div>
-                        </form>
-                        <h3 id="git-search-msg">Toca la caja para buscar los regalos que tenemos para ti.</h3>
-                        <h1 id="geolocation"></h1>
-                    </div>
-                </div>
-            </section>
+    </div>
+    <!-- Modal error -->
+    <div id="modal-error" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Error!</h4>
+            <p><strong id="error-msg"></strong>. intentalo nuevamente!</p>
+            <p>Si el error persiste puedes contactarnos a <span class="red-500-text"><strong>soporte@megift.co</strong></span></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn waves-effect waves-green btn-flat modal-action modal-close">Aceptar</a>
         </div>
     </div>
-    <div class="i-popup-mask hidden"></div>
-    <div id="before-send-popup" class="i-popup-panel i-popup-primary hidden text-primary text-center">
-        <h4><i class="fa fa-spinner fa-pulse fa-5x"></i></h4>
-        <h5>Enviando, por favor espera...</h5>
-    </div>
-    <div id="error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
-        <p>Lo siento, ha ocurrido un error(<span id="error-msg"></span>), intentalo nuevamente!</p>
-        <p>Si el error persiste puedes contactarnos a <span class="text-danger"><strong>soporte@megift.co</strong></span></p>
-        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
-    </div>
-    <div id="general-error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
-        <p id="general-error-msg"></p>
-        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
-    </div>
-
-
     <script src="../../intelxdk.js"></script>
     <script src="../../cordova.js"></script>
     <script src="../../xhr.js"></script>
-    <script src="../../js/inventor/Inventor.min.js"></script>
-    <script src="../../js/inventor/InventorMobile.min.js"></script>
+    <script src="../../public/js/jquery.min.js"></script>
+    <script src="../../public/materialize/js/materialize.min.js"></script>
     <script>
-        var localHost = 'http://localhost:9000';
-        var successResponse = "OK";
         var host = window.localStorage.getItem('host');
         var idLogin = window.localStorage.getItem('id-login');
-        var form = new Form(document.getElementById('gift-search-form'));
-        var beforeSendPopup = new Popup(document.getElementById('before-send-popup'));
-        var errorPopup = new Popup(document.getElementById('error-popup'));
-        var generalErrorPopup = new Popup(document.getElementById('general-error-popup'));
+        var successResponse = 'OK';
         var giftSearchMsg = document.getElementById('git-search-msg');
-        var giftSearchBtn = document.getElementById('gift-search-btn');      
-        //device ready
+        var giftSearchBtn = document.getElementById('gift-search-btn');
+        /*
+        * device onready
+        */
         function onDeviceReady() {
             init();
         }
-        // for local work in web broswers
-        //not working on device test app
-        /*if (host === localHost) {
-            init();
-        }*/
+        document.addEventListener("deviceready", onDeviceReady, false);
         init();
-        //declare init
+        //function init
         function init() {
-            initNav();
+            // Initialize collapse button
+            $(".button-collapse").sideNav();
         }
-        //login form
-        form.onsubmit(function () {
-            giftSearch();
-        });
-
+        /*
+        * Search Gift
+        */
         function giftSearch() {
             giftSearchMsg.textContent = 'Buscando regalos...';
             giftSearchBtn.disabled = true;
             giftSearchBtn.classList.add('btn-gift-search-disabled');
-            giftSearchBtn.classList.remove('i-tada');
+            giftSearchBtn.classList.remove('i-bounce-in');
             giftSearchBtn.classList.remove('i-2s');
             giftSearchBtn.classList.add('i-2s');
             giftSearchBtn.classList.add('i-infinite');
             giftSearchBtn.classList.add('i-pulse');
-
             navigator.geolocation.getCurrentPosition(onSuccess, onError);
         }
-        // onSuccess Geolocation
-        //
+        /*
+        /* onSuccess Geolocation
+        */
         function onSuccess(position) {
-            var element = document.getElementById('geolocation');
             var latitude = position.coords.longitude;
             var longitude = position.coords.latitude;
             document.getElementsByName('latitude')[0].value = latitude;
@@ -141,64 +143,59 @@
             window.localStorage.removeItem('POS-list');
             window.localStorage.removeItem('latitude');
             window.localStorage.removeItem('longitude');
-
-            var giftSearchXHR = new XHR('POST', host + '/searchGift');
-            giftSearchXHR.setContentType('application/x-www-form-urlencoded;charset=UTF-8');
-            giftSearchXHR.onReady(function (xhr) {
-                giftSearchMsg.textContent = 'Toca la caja para buscar los regalos que tenemos para ti.';
-                giftSearchBtn.disabled = false;
-                giftSearchBtn.classList.remove('btn-gift-search-disabled');
-                giftSearchBtn.classList.remove('i-2s');
-                giftSearchBtn.classList.remove('i-infinite');
-                giftSearchBtn.classList.remove('i-pulse');
-                try {
-                    var posList = JSON.parse(xhr.responseText);
-                    if (posList.length < 1) {
-                        giftSearchMsg.textContent = 'No hay regalos cerca a tu ubicación';
-                    } else {
-                        window.localStorage.setItem('POS-list', xhr.responseText);
-                        window.localStorage.setItem('latitude', latitude);
-                        window.localStorage.setItem('longitude', longitude);
-                        window.location = 'gift-list.html';
+            $.ajax({
+                type: 'POST',
+                url: host + '/searchGift',
+                data: $('#gift-search-form').serialize(),
+                success: function (response) {
+                    giftSearchMsg.textContent = 'Tocame para buscar los regalos que tenemos para ti.';
+                    giftSearchBtn.disabled = false;
+                    giftSearchBtn.classList.remove('btn-gift-search-disabled');
+                    giftSearchBtn.classList.remove('i-2s');
+                    giftSearchBtn.classList.remove('i-infinite');
+                    giftSearchBtn.classList.remove('i-pulse');
+                    try {
+                        var posList = JSON.parse(response);
+                        if (posList.length < 1) {
+                            toast('No hay regalos cerca a tu ubicación', 8000, 'toast-danger');
+                        } else {
+                            window.localStorage.setItem('POS-list', response);
+                            window.localStorage.setItem('latitude', latitude);
+                            window.localStorage.setItem('longitude', longitude);
+                            window.location = 'gift-list.html';
+                        }
+                    } catch (ex) {
+                        toast(response, 8000, 'toast-danger');
                     }
-                } catch (ex) {
-                    console.log(ex);
-                    document.getElementById('general-error-msg').textContent = xhr.responseText;
-                    generalErrorPopup.show();
+                },
+                error: function (xhr) {
+                    hiddenPreloader();
+                    document.getElementById('error-msg').textContent = xhr.responseText;
+                    $('#modal-error').openModal();
                 }
             });
-            giftSearchXHR.onError(function (xhr) {
-                document.getElementById('error-msg').textContent = xhr.statusText;
-                errorPopup.show();
-            });
-            giftSearchXHR.send(form.serialize());
         }
-        // onError Callback receives a PositionError object
-        //
+        /*
+        /* onError Callback receives a PositionError object
+        */
         function onError(error) {
-            alert('code: ' + error.code + '\n' +
-                  'message: ' + error.message + '\n');
+            toast('code: ' + error.code + '\n' + 'message: ' + error.message + '\n', 8000, 'toast-danger');
         }
-        function initNav() {
-            document.getElementById('nav-app').style.height = Utils.getWindowMaxHeight() + 'px';
-        }
-        function toggleNav() {
-            var nav = document.getElementById('nav-app');
-            nav.classList.toggle('hidden');
-        }
-        function hiddenNav() {
-            var nav = document.getElementById('nav-app');
-            if (!nav.classList.contains('hidden')) {
-                nav.classList.add('hidden');
-            }
-        }
+        /*
+        * Submit form
+        */
+        $('#gift-search-form').submit(function (e) {
+            e.preventDefault();
+            giftSearch();
+        });
+        /*
+        * Sign out
+        */
         function singOut() {
             window.localStorage.clear();
             window.localStorage.setItem("user-is-register", 1);
             window.location = '../../index.html';
         }
-
-        document.addEventListener("deviceready", onDeviceReady, false);
     </script>
 </body>
 </html>

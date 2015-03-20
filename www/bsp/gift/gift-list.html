@@ -4,14 +4,144 @@
     <title>Megift App Gift Results Search</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
+    <link href="../../public/css/inventor/animations.min.css" rel="stylesheet" />
+    <link href="../../public/materialize/css/materialize.min.css" rel="stylesheet" />
+    <link href="../../public/css/app.min.css" rel="stylesheet" />
 </head>
 
-<body class="i-ease-in i-1s i-fade-in">
-    <div class="content-main">
+<body class="i-ease-in i-1s i-fade-in flow-text">
+    <div class="navbar-fixed">
+        <nav class="deep-orange" role="navigation">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo brand-logo-s truncate">
+                    Regalos para disfrutar.
+                </a>
+                <a href="partner.html" rel="external" data-activates="nav-mobile" class="button-collapse">
+                    <i class="mdi-hardware-keyboard-backspace"></i>
+                </a>
+                <ul class="right navbar-actions">
+                    <li><a href="sass.html"><i class="mdi-action-search"></i></a></li>
+                    <li><a href="components.html"><i class="mdi-action-view-module"></i></a></li>
+                </ul>
+            </div> 
+        </nav>
+    </div>
+    <!-- Modal error -->
+    <div id="modal-error" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Error!</h4>
+            <p><strong id="error-msg"></strong>. intentalo nuevamente!</p>
+            <p>Si el error persiste puedes contactarnos a <span class="red-500-text"><strong>soporte@megift.co</strong></span></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn waves-effect waves-green btn-flat modal-action modal-close">Aceptar</a>
+        </div>
+    </div>
+    <script src="../../intelxdk.js"></script>
+    <script src="../../cordova.js"></script>
+    <script src="../../xhr.js"></script>
+    <script src="../../public/js/jquery.min.js"></script>
+    <script src="../../public/materialize/js/materialize.min.js"></script>
+    <script>
+        var host = window.localStorage.getItem('host');
+        var idLogin = window.localStorage.getItem('id-login');
+        var successResponse = 'OK';
+        /*
+        * device onready
+        */
+        function onDeviceReady() {
+            init();
+        }
+        document.addEventListener("deviceready", onDeviceReady, false);
+        init();
+        //function init
+        function init() {
+            // Initialize collapse button
+            $(".button-collapse").sideNav();
+            $(".dropdown-button").dropdown();
+        }
+        /*
+        * Search Gift
+        */
+        function giftSearch() {
+            giftSearchMsg.textContent = 'Buscando regalos...';
+            giftSearchBtn.disabled = true;
+            giftSearchBtn.classList.add('btn-gift-search-disabled');
+            giftSearchBtn.classList.remove('i-bounce-in');
+            giftSearchBtn.classList.remove('i-2s');
+            giftSearchBtn.classList.add('i-2s');
+            giftSearchBtn.classList.add('i-infinite');
+            giftSearchBtn.classList.add('i-pulse');
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
+        /*
+        /* onSuccess Geolocation
+        */
+        function onSuccess(position) {
+            var latitude = position.coords.longitude;
+            var longitude = position.coords.latitude;
+            document.getElementsByName('latitude')[0].value = latitude;
+            document.getElementsByName('longitude')[0].value = longitude;
+            document.getElementsByName('id-login')[0].value = idLogin;
+            //clean local storage
+            window.localStorage.removeItem('POS-list');
+            window.localStorage.removeItem('latitude');
+            window.localStorage.removeItem('longitude');
+            $.ajax({
+                type: 'POST',
+                url: host + '/searchGift',
+                data: $('#gift-search-form').serialize(),
+                success: function (response) {
+                    giftSearchMsg.textContent = 'Tocame para buscar los regalos que tenemos para ti.';
+                    giftSearchBtn.disabled = false;
+                    giftSearchBtn.classList.remove('btn-gift-search-disabled');
+                    giftSearchBtn.classList.remove('i-2s');
+                    giftSearchBtn.classList.remove('i-infinite');
+                    giftSearchBtn.classList.remove('i-pulse');
+                    try {
+                        var posList = JSON.parse(response);
+                        if (posList.length < 1) {
+                            toast('No hay regalos cerca a tu ubicación', 8000, 'toast-danger');
+                        } else {
+                            window.localStorage.setItem('POS-list', response);
+                            window.localStorage.setItem('latitude', latitude);
+                            window.localStorage.setItem('longitude', longitude);
+                            window.location = 'gift-list.html';
+                        }
+                    } catch (ex) {
+                        toast(response, 8000, 'toast-danger');
+                    }
+                },
+                error: function (xhr) {
+                    hiddenPreloader();
+                    document.getElementById('error-msg').textContent = xhr.responseText;
+                    $('#modal-error').openModal();
+                }
+            });
+        }
+        /*
+        /* onError Callback receives a PositionError object
+        */
+        function onError(error) {
+            toast('code: ' + error.code + '\n' + 'message: ' + error.message + '\n', 8000, 'toast-danger');
+        }
+        /*
+        * Submit form
+        */
+        $('#gift-search-form').submit(function (e) {
+            e.preventDefault();
+            giftSearch();
+        });
+        /*
+        * Sign out
+        */
+        function singOut() {
+            window.localStorage.clear();
+            window.localStorage.setItem("user-is-register", 1);
+            window.location = '../../index.html';
+        }
+    </script>
+    <!--<div class="content-main">
         <div id="nav-app" class="nav-app  hidden ">
             <div class="list-group">
                 <a class="list-group-item list-group-item active" href="../partner/partner.html" rel="external">
@@ -111,7 +241,7 @@
         }
         function singOut() {
             window.localStorage.clear();
-            window.localStorage.setItem("user-is-register",1);
+            window.localStorage.setItem("user-is-register", 1);
             window.location = '../../index.html';
         }
         //load gift
@@ -211,6 +341,6 @@
                 element.appendChild(col);
             };
         }
-    </script>
+    </script>-->
 </body>
 </html>

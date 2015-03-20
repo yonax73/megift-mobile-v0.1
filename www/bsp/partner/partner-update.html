@@ -10,16 +10,18 @@
     <link href="../../public/css/app.min.css" rel="stylesheet" />
 </head>
 <body class="i-ease-in i-1s i-fade-in">
-    <nav class="deep-orange" role="navigation">
-        <div class="nav-wrapper container">
-            <a href="#" class="brand-logo brand-logo-s truncate">
-                Yonatan A Quintero R.
-            </a>
-            <a href="partner.html" rel="external" data-activates="nav-mobile" class="button-collapse">
-                <i class="mdi-hardware-keyboard-backspace"></i>
-            </a>
-        </div>
-    </nav>
+    <div class="navbar-fixed">
+        <nav class="deep-orange" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="title" href="#" class="brand-logo brand-logo-s truncate">
+                    Yonatan A Quintero R.
+                </a>
+                <a href="partner.html" rel="external" data-activates="nav-mobile" class="button-collapse">
+                    <i class="mdi-hardware-keyboard-backspace"></i>
+                </a>
+            </div>
+        </nav>
+    </div>
     <div class="container container-fluid deep-orange m-top-1rem separator-gray-300">
         <form id="photo-form">
             <img class="image-fluid" id="image-partner" src="../../public/images/avatar-user.png" />
@@ -148,6 +150,7 @@
         */
         function loadPartner() {
             //atributes
+            var title = document.getElementById('title');
             var imagePartner = document.getElementById('image-partner');
             var namePartner = document.getElementById('name-partner');
             var emailPartner = document.getElementById('email-partner');
@@ -161,6 +164,7 @@
             var idCity = document.getElementById('id-city');
 
             //set
+            title.textContent = partner.fullName;
             idPartner.value = partner.id;
             idLocation.value = partner.location.id;
             idCity.value = partner.location.address === null ? 0 : partner.location.address.city.id;
