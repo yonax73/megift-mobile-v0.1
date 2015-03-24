@@ -61,7 +61,9 @@
             </a>
         </div>
     </nav>
-
+    <div id="preloader" class="progress-deep-orange progress hidden">
+        <div class="progress-deep-orange indeterminate"></div>
+    </div>
     <div class="container m-top-1rem">
         <div class="row">
             <div class="col s12 content-gift-search center">
@@ -69,6 +71,10 @@
                     <input name="latitude" type="hidden" value="0" />
                     <input name="longitude" type="hidden" value="0" />
                     <input name="id-login" type="hidden" value="0" />
+                    <input name="gift-type-id" type="hidden" value="0" />
+                    <input name="action-type-id" type="hidden" value="0" />
+                    <input name="business-type-id" type="hidden" value="0" />
+                    <input id="type-view" name="type-view" type="hidden" value="0" />
                     <div class="col s12">
                         <button id="gift-search-btn" type="submit" class="btn btn-gift-search waves-effect waves-circle z-depth-5 red i-ease-in i-2s i-bounce-in">
                             <img src="../../public/images/gift128x145.png" alt="buscar regalo">
@@ -90,6 +96,19 @@
         </div>
         <div class="modal-footer">
             <a href="#" class="btn waves-effect waves-green btn-flat modal-action modal-close">Aceptar</a>
+        </div>
+    </div>
+    <!-- Modal BLOCK -->
+    <div id="modal-error" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h5>Hola!</h5>
+            <p>
+                Para poderte dar los mejores regalos y brindarte una mejor experiencia,
+                necesitamos que completes tú perfil de usuario.
+            </p>
+        </div>
+        <div class="modal-footer">
+            <a href="../partner/partner-update.html" rel="external" class="btn waves-effect waves-green btn-flat modal-action modal-close">Aceptar</a>
         </div>
     </div>
     <script src="../../intelxdk.js"></script>
@@ -115,6 +134,8 @@
         function init() {
             // Initialize collapse button
             $(".button-collapse").sideNav();
+            //load setting user
+            loadSearchSettings();
         }
         /*
         * Search Gift
@@ -125,7 +146,7 @@
             giftSearchBtn.classList.add('btn-gift-search-disabled');
             giftSearchBtn.classList.remove('i-bounce-in');
             giftSearchBtn.classList.remove('i-2s');
-            giftSearchBtn.classList.add('i-2s');
+            giftSearchBtn.classList.add('i-5s');
             giftSearchBtn.classList.add('i-infinite');
             giftSearchBtn.classList.add('i-pulse');
             navigator.geolocation.getCurrentPosition(onSuccess, onError);
@@ -134,11 +155,12 @@
         /* onSuccess Geolocation
         */
         function onSuccess(position) {
-            var latitude = position.coords.longitude;
-            var longitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var latitude = position.coords.latitude;
             document.getElementsByName('latitude')[0].value = latitude;
             document.getElementsByName('longitude')[0].value = longitude;
             document.getElementsByName('id-login')[0].value = idLogin;
+            document.getElementById('type-view').value = window.localStorage.getItem('current-view');
             //clean local storage
             window.localStorage.removeItem('POS-list');
             window.localStorage.removeItem('latitude');
@@ -151,7 +173,7 @@
                     giftSearchMsg.textContent = 'Tocame para buscar los regalos que tenemos para ti.';
                     giftSearchBtn.disabled = false;
                     giftSearchBtn.classList.remove('btn-gift-search-disabled');
-                    giftSearchBtn.classList.remove('i-2s');
+                    giftSearchBtn.classList.remove('i-5s');
                     giftSearchBtn.classList.remove('i-infinite');
                     giftSearchBtn.classList.remove('i-pulse');
                     try {
@@ -179,15 +201,72 @@
         /* onError Callback receives a PositionError object
         */
         function onError(error) {
+            giftSearchMsg.textContent = 'Tocame para buscar los regalos que tenemos para ti.';
+            giftSearchBtn.disabled = false;
             toast('code: ' + error.code + '\n' + 'message: ' + error.message + '\n', 8000, 'toast-danger');
         }
         /*
         * Submit form
         */
         $('#gift-search-form').submit(function (e) {
-            e.preventDefault();
-            giftSearch();
+            //validar si el usuario tiene el search bloqueado
+            var isBlocked = window.localStorage.getItem('block-search');
+            if (isBlocked !== 'undefined' || isBlocked !== undefined || !isBlocked) {
+                e.preventDefault();
+                giftSearch();
+            } else {
+
+            }
         });
+        /*
+         * load search settings
+         */
+        function loadSearchSettings() {
+            if (window.localStorage.getItem('current-view') == 'undefined' || !window.localStorage.getItem('current-view')) {
+                $.ajax({
+                    type: 'GET',
+                    url: host + '/loadSettings?id=' + idLogin,
+                    beforeSend: function () {
+                        showPreloader();
+                        giftSearchBtn.disabled = true;
+                    },
+                    success: function (response) {
+                        hiddenPreloader();
+                        giftSearchBtn.disabled = false;
+                        try {
+                            search_setting = JSON.parse(response);
+                            window.localStorage.setItem('current-view', search_setting.settings.searchSetting.id);
+                        } catch (ex) {
+                            toast(response, 8000, 'toast-danger');
+                        }
+                    },
+                    error: function (xhr) {
+                        hiddenPreloader();
+                        giftSearchBtn.disabled = false;
+                        document.getElementById('error-msg').textContent = xhr.responseText;
+                        $('#modal-error').openModal();
+                    }
+                });
+            }
+        }
+        /*
+        * Mostrar preloader
+        */
+        function showPreloader() {
+            var preloader = document.getElementById('preloader');
+            if (preloader.classList.contains('hidden')) {
+                preloader.classList.remove('hidden');
+            }
+        }
+        /*
+        * Esconder preloader
+        */
+        function hiddenPreloader() {
+            var preloader = document.getElementById('preloader');
+            if (!preloader.classList.contains('hidden')) {
+                preloader.classList.add('hidden');
+            }
+        }
         /*
         * Sign out
         */

@@ -9,7 +9,7 @@
     <link href="../../public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../../public/css/app.min.css" rel="stylesheet" />
 </head>
-<body class="i-ease-in i-1s i-fade-in">
+<body class="i-ease-in i-1s i-fade-in flow-text">
     <nav class="deep-orange" role="navigation">
         <div class="nav-wrapper container">
             <a href="#" class="brand-logo brand-logo-s truncate">
@@ -62,11 +62,13 @@
         </div>
     </nav>
 
-    <div class="container container-fluid deep-orange m-top-1rem separator-gray-300">
-        <img class="image-fluid" id="image-partner" src="../../public/images/avatar-user.png" />
+    <div class="container container-fluid deep-orange m-top-1rem">
+        <img class="image-fluid" id="image-partner" src="../../public/images/preloader.gif" />
         <div class="front-content transparent-bg">
             <p class="flow-text" id="name-partner">
-                Nombre de usuario avatar
+                <span class="progress">
+                    <span class="indeterminate"></span>
+                </span>
             </p>
         </div>
         <div id="update-partner-content" class="fixed-action-btn">
@@ -75,64 +77,81 @@
             </a>
         </div>
     </div>
-    <div id="preloader" class="progress-deep-orange progress hidden">
-        <div class="progress-deep-orange indeterminate"></div>
-    </div>
-    <div class="container flow-text">
+    <div class="container m-top-1rem">
         <div class="row">
             <div class="col s12 ">
-                <p class="separator-gray-300">
-                    <i class="fa fa-envelope-o deep-orange-500-text">
-                        &nbsp;&nbsp;
-                    </i>
-                    <span id="email-partner">
-                        yonax73@gmail.com
-                    </span>
-                    <br />
-                    <small class="grey-text">
-                        Correo Electrónico
-                    </small>
-                </p>
-                <p class="separator-gray-300">
-                    <i class="fa fa-transgender deep-orange-500-text">
-                        &nbsp;&nbsp;
-                    </i>
-                    <span id="gender-partner">
-                        Mujer
-                    </span>
-                    <br />
-                    <small class="grey-text">
-                        Sexo
-                    </small>
-                </p>
-                <p class="separator-gray-300">
-                    <i class="fa fa-birthday-cake deep-orange-500-text">
-                        &nbsp;&nbsp;
-                    </i>
-                    <span id="birthday-partner">
-                        11-05-1988
-                    </span>
-                    <br />
-                    <small class="grey-text">
-                        Fecha de nacimiento
-                    </small>
-                </p>
-                <p class="separator-gray-300">
-                    <i class="fa fa-globe deep-orange-500-text">
-                        &nbsp;&nbsp;
-                    </i>
-                    <span id="city-partner">
-                        Medellin
-                    </span>
-                    <span class="hidden">,</span>
-                    <span id="couuntry-partner" class="hidden">
-                        Colombia
-                    </span>
-                    <br />
-                    <small class="grey-text">
-                        Ubicación
-                    </small>
-                </p>
+                <div class="row">
+                    <div class="col s2">
+                        <i class="fa fa-envelope-o deep-orange-500-text">
+                            &nbsp;
+                        </i>
+                    </div>
+                    <div class="col s10 text-description">
+                        <p id="email-partner">
+                            <span class="progress">
+                                <span class="indeterminate"></span>
+                            </span>
+                        </p>
+                        <label class="grey-text">
+                            Correo Electrónico
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2">
+                        <i class="fa fa-transgender deep-orange-500-text">
+                            &nbsp;
+                        </i>
+                    </div>
+                    <div class="col s10 text-description">
+                        <p id="gender-partner">
+                            <span class="progress">
+                                <span class="indeterminate"></span>
+                            </span>
+                        </p>
+                        <label class="grey-text">
+                            Sexo
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2">
+                        <i class="fa fa-birthday-cake deep-orange-500-text">
+                            &nbsp;
+                        </i>
+                    </div>
+                    <div class="col s10 text-description">
+                        <p id="birthday-partner">
+                            <span class="progress">
+                                <span class="indeterminate"></span>
+                            </span>
+                        </p>
+                        <label class="grey-text">
+                            Fecha de nacimiento
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2">
+                        <i class="fa fa-globe deep-orange-500-text">
+                            &nbsp;
+                        </i>
+                    </div>
+                    <div class="col s10 text-description">
+                        <p id="city-partner">
+                            <span class="progress">
+                                <span class="indeterminate"></span>
+                            </span>
+                        </p>
+                        <p class="hidden">,</p>
+                        <p id="couuntry-partner" class="hidden">
+                            Colombia
+                        </p>
+                        <label class="grey-text">
+                            Ubicación
+                        </label>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -176,11 +195,7 @@
                 type: 'POST',
                 url: host + '/loadPartner',
                 data: 'id-login=' + idLogin,
-                beforeSend: function () {
-                    showPreloader();
-                },
                 success: function (response) {
-                    hiddenPreloader();
                     try {
                         //atributes
                         var partner = JSON.parse(response);
@@ -199,36 +214,20 @@
                         emailPartner.textContent = partner.login.email;
                         if (partner.picture.id > 0) {
                             imagePartner.src = partner.picture.dataURI;
+                        } else {
+                            imagePartner.src = '../../public/images/avatar.png';
                         }
                     } catch (ex) {
                         toast(response, 8000, 'toast-danger');
                     }
                 },
                 error: function (xhr) {
-                    hiddenPreloader();
                     document.getElementById('error-msg').textContent = xhr.responseText;
                     $('#modal-error').openModal();
                 }
             });
         }
-        /*
-        * Mostrar preloader
-        */
-        function showPreloader() {
-            var preloader = document.getElementById('preloader');
-            if (preloader.classList.contains('hidden')) {
-                preloader.classList.remove('hidden');
-            }
-        }
-        /*
-        * Esconder preloader
-        */
-        function hiddenPreloader() {
-            var preloader = document.getElementById('preloader');
-            if (!preloader.classList.contains('hidden')) {
-                preloader.classList.add('hidden');
-            }
-        }
+
         /*
         * Sign out
         */

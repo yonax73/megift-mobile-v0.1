@@ -4,313 +4,409 @@
     <title>Megift App Detail Gift</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/megift.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/inventor/animations.min.css" rel="stylesheet" media="screen">
-    <link href="../../css/app.min.css" rel="stylesheet" media="screen" />
+    <link href="../../public/css/inventor/animations.min.css" rel="stylesheet" />
+    <link href="../../public/materialize/css/materialize.min.css" rel="stylesheet" />
+    <link href="../../public/css/app.min.css" rel="stylesheet" />
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 </head>
 
-<body class="i-ease-in i-1s i-fade-in">
-    <div class="content-main">
-        <div id="nav-app" class="nav-app  hidden ">
-            <div class="list-group">
-                <a class="list-group-item list-group-item active" href="gift-list.html" rel="external">
-                    <i class="fa fa-arrow-left fa-fw fa-2x"></i>&nbsp; Atras
+<body class="i-ease-in i-1s i-fade-in flow-text">
+    <div class="navbar-fixed">
+        <nav class="deep-orange" role="navigation">
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo brand-logo-s truncate">
+                    Detalles del Regalo
                 </a>
-                <a class="list-group-item list-group-item active" href="../partner/partner.html" rel="external">
-                    <i class="fa fa-user fa-fw fa-2x"></i>&nbsp; Mi Perfil
-                </a>
-                <a class="list-group-item list-group-item active" href="search-gift.html" rel="external">
-                    <i class="fa fa-gift fa-fw fa-2x"></i>&nbsp; Buscar regalos
-                </a>
-                <a class="list-group-item list-group-item active" href="../../social/inviteFriends.html" rel="external">
-                    <i class="fa fa-share-alt fa-fw fa-2x"></i>&nbsp; Invitar amigos
-                </a>
-                <a class="list-group-item list-group-item active" href="../../sec/settings/settings.html" rel="external">
-                    <i class="fa fa-wrench fa-fw fa-2x"></i>&nbsp; Ajustes
-                </a>
-                <a class="list-group-item list-group-item active" href="../../sec/login/help.html" rel="external">
-                    <i class="fa fa-info-circle fa-fw fa-2x"></i>&nbsp; Ayuda
-                </a>
-                <a class="list-group-item list-group-item active" href="#" onclick="singOut()">
-                    <i class="fa fa-sign-out fa-fw fa-2x"></i>&nbsp; Cerrar sesión
+                <a href="gift-list.html" rel="external" data-activates="nav-mobile" class="button-collapse">
+                    <i class="mdi-hardware-keyboard-backspace"></i>
                 </a>
             </div>
-        </div>
-        <div class="content-app">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header" onclick="toggleNav()">
-                        <span class="navbar-brand">
-                            <i class="fa fa-bars"></i>
-                        </span>
-                        <p class="navbar-text">Informacón de tú regalo</p>
-                    </div>
-                </div>
-            </nav>
-            <section class="container-fluid" onclick="hiddenNav()">
-                <div class="row text-justify">
-                    <span id="msg-load">Cargando...</span>
-                    <div id="detail-gift" class="col-lg-4 col-md-4 col-sm-6 detail-gift hidden">
-                        <ul class="list-group">
-                            <li id="gift-name" class="list-group-item">
-                                Nombre Del regalo
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li class="list-group-item content-img">
-                                <img id="gift-picture" src="../../images/gift.png">
-                            </li>
-                        </ul>
-                        <ul class="list-group ">
-                            <li class="list-group-item">
-                                <p>
-                                    <i class="fa fa-file-text-o">&nbsp;</i>
-                                    <span id="type-gift">Comida</span>
-                                </p>
-                                <p>
-                                    <i class="fa fa-money">&nbsp;</i>
-                                    <s id="gift-price">$0</s>
-                                    <span class="text-success">&nbsp;$0</span>
-                                </p>
-                                <p>
-                                    <i class="fa fa-clock-o">&nbsp;</i>
-                                    <span id="gift-time">36:45:10</span>
-                                </p>
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li class="list-group-item ">
-                                <strong>Descripción</strong>
-                                <br />
-                                <br />
-                                <p id="gift-description">
-                                    disfruta de un delicioso postre chessecake que te llenara el paladar de dulzura y sabor, de seguro te encantara y magnificara el placer cool
-                                </p>
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                ¿Que debes hacer para
-                                disfrutar tu regalo?
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li id="action-name" class="list-group-item">
-                                Nombre de la accion
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li class="list-group-item content-img">
-                                <img id="action-picture" src="../../images/action.png">
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li id="action-name" class="list-group-item">
-                                <i class="fa fa-money">&nbsp;</i>
-                                <span id="action-price">$0</span>
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li class="list-group-item ">
-                                <strong>Descripción</strong>
-                                <br />
-                                <br />
-                                <p id="action-description">
-                                    disfruta de un delicioso postre chessecake que te llenara el paladar de dulzura y sabor, de seguro te encantara y magnificara el placer cool
-                                </p>
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li class="list-group-item ">
-                                <strong>Terminos y condiciones</strong>
-                                <br />
-                                <br />
-                                <p id="terms-conditions-gift">
-                                    *Aplica de lunes a jueves.
-                                    *No acumulable con otros beneficios.
-                                </p>
-                                <br />
-                                <p>Puede leer las condiciones generales que aplican a todos los regalos <a href="../sec/login/termsAndConditions.html" rel="external">aquí</a></p>
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li class="list-group-item ">
-                                <strong>Datos de contacto</strong>
-                                <br />
-                                <br />
-                                <p>
-                                    <i class="fa fa-shopping-cart">&nbsp;</i>
-                                    <span id="business-name">Nombre punto de negocio</span>
-                                </p>
-                                <p>
-                                    <i class="fa fa-phone-square">&nbsp;</i>
-                                    <span id="pos-mb-phone">31313131</span>
-                                </p>
-                                <p>
-                                    <i class="fa fa-envelope-o">&nbsp;</i>
-                                    <span id="pos-email-contact">mi@mi.com</span>
-                                </p>
-                                <p>
-                                    <i class="fa fa-car">&nbsp;</i>
-                                    <span id="pos-distance">125 mts</span>
-                                </p>
-                                <p>
-                                    <i class="fa fa-map-marker">&nbsp;</i>
-                                    <span id="pos-address">CR 49B Cl 87 15 Medellin Colombia</span>
-                                </p>
-                                <div id="map" class="map"></div>
-                                <p>
-                                    <i class="fa fa-gift">&nbsp;</i>
-                                    <span>Otros regalos de <span id="business-name-2"> nombre punto de venta</span> </span>
-                                </p>
-                            </li>
-                        </ul>
-                        <ul class="list-group">
-                            <li class="list-group-item ">
-                                <div class="row text-center">
-                                    <div class="col-sm-12">
-                                        <p>Comparte este regalo con tus amigos</p>
-                                        <br />
-                                        <button class="btn btn-lg btn-default "><i class="fb-color fa fa-facebook-official fa-5x"></i></button>
-                                        <button class="btn btn-lg btn-default  "><i class="tw-color fa fa-twitter-square fa-5x"></i></button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+        </nav>
+    </div>
+    <div class="container container-fluid deep-orange m-top-1rem">
+        <img class="image-fluid" id="gift-picture" src="../../public/images/preloader.gif" />
+        <div class="front-content transparent-bg">
+            <p id="gift-name">
+                <span class="progress">
+                    <span class="indeterminate"></span>
+                </span>
+            </p>
         </div>
     </div>
-    <div class="i-popup-mask hidden"></div>
-    <div id="before-send-popup" class="i-popup-panel i-popup-primary hidden text-primary text-center">
-        <h4><i class="fa fa-spinner fa-pulse fa-5x"></i></h4>
-        <h5>Enviando, por favor espera...</h5>
+    <div class="content-description">
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-action-wallet-giftcard">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="type-gift">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text ">
+                    Tipo de regalo
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-maps-local-atm">&nbsp;</i>
+            </div>
+
+            <div class="text-description col s10">
+                <s id="gift-price">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </s>
+                <span class="red-text">&nbsp;$0</span>
+                <label class="grey-text">
+                    Precio del regalo
+                </label>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-device-access-time">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="gift-time">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Vigencia del regalo
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-action-description">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="gift-description" class="text-justify">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Descripción del regalo
+                </label>
+            </div>
+        </div>
     </div>
-    <div id="error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
-        <p>Lo siento, ha ocurrido un error(<span id="error-msg"></span>), intentalo nuevamente!</p>
-        <p>Si el error persiste puedes contactarnos a <span class="text-danger"><strong>soporte@megift.co</strong></span></p>
-        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    <div class="content-description deep-orange">
+        <h5 class="white-text">
+            ¿Que debes hacer para
+            disfrutar tu regalo?
+        </h5>
     </div>
-    <div id="general-error-popup" class="i-popup-panel i-popup-danger hidden text-justify">
-        <p id="general-error-msg"></p>
-        <button class="btn btn-danger btn-lg btn-block i-popup-close">Aceptar</button>
+    <div class="content-description">
+        <p id="action-name" class="separator-gray-300">
+            <span class="progress">
+                <span class="indeterminate"></span>
+            </span>
+        </p>
+    </div>
+    <div class="container container-fluid deep-orange" style="top:-1px">
+        <img class="image-fluid" id="action-picture" src="../../public/images/preloader.gif" />
+    </div>
+    <div class="content-description">
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-action-loyalty">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="action-price">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Precio
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-action-description">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="action-description" class="text-justify">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Descripción
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-action-assignment-turned-in">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="terms-conditions-gift" class="text-justify">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="gray-text">
+                    Terminos y condiciones
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="content-description deep-orange">
+        <p class="white-text">
+            Datos de contacto
+        </p>
+    </div>
+    <div class="content-description">
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-action-shopping-cart">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="business-name">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Empresa
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-communication-phone">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="pos-mb-phone">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Teléfono Móvil
+                </label>
+                <p id="pos-phone" class="span">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Teléfono Fijo
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-communication-email">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="pos-email-contact">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Correo electrónico
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-maps-directions-car">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="pos-distance">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Distancia al punto de venta
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2">
+                <i class="mdi-maps-place">&nbsp;</i>
+            </div>
+            <div class="text-description col s10">
+                <p id="pos-address">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </p>
+                <label class="grey-text">
+                    Dirección
+                </label>
+            </div>
+        </div>
+        <div id="map" class="map">
+            <span class="progress">
+                <span class="indeterminate"></span>
+            </span>
+        </div>
+        <a href="business.html" rel="external">
+            <i class="mdi-action-wallet-giftcard">&nbsp;</i>
+            <span>
+                Otros regalos de
+                <span id="business-name-2">
+                    <span class="progress">
+                        <span class="indeterminate"></span>
+                    </span>
+                </span>
+            </span>
+        </a>
+    </div>
+    <div class="content-description deep-orange">
+        <h6 class="white-text">
+            Comparte este regalo con tus amigos
+        </h6>
+    </div>
+    <div class="content-description">
+        <div class="row">
+            <div class="col s6">
+                <button class="btn waves-effect waves-teal  btn-large  fb-bg">
+                    Facebook
+                    <i class="mdi-social-share"></i>
+                </button>
+            </div>
+            <div class="col s6">
+                <button class="btn waves-effect waves-teal  btn-large  tw-bg">
+                    Twitter
+                    <i class="mdi-social-share"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
+    <!-- Modal error -->
+    <div id="modal-error" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Error!</h4>
+            <p><strong id="error-msg"></strong>. intentalo nuevamente!</p>
+            <p>Si el error persiste puedes contactarnos a <span class="red-500-text"><strong>soporte@megift.co</strong></span></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn waves-effect waves-green btn-flat modal-action modal-close">Aceptar</a>
+        </div>
+    </div>
     <script src="../../intelxdk.js"></script>
     <script src="../../cordova.js"></script>
     <script src="../../xhr.js"></script>
-    <script src="../../js/inventor/Inventor.min.js"></script>
-    <script src="../../js/inventor/InventorMobile.min.js"></script>
-
+    <script src="../../public/js/jquery.min.js"></script>
+    <script src="../../public/materialize/js/materialize.min.js"></script>
     <script>
-        var localHost = 'http://localhost:9000';
-        var successResponse = "OK";
+        var idLogin = window.localStorage.getItem('id-login');
         var host = window.localStorage.getItem('host');
         var posId = window.localStorage.getItem('pos-id');
         var giftId = window.localStorage.getItem('gift-id');
         var userLat = window.localStorage.getItem('latitude');
         var userLng = window.localStorage.getItem('longitude');
-        var beforeSendPopup = new Popup(document.getElementById('before-send-popup'));
-        var errorPopup = new Popup(document.getElementById('error-popup'));
-        var generalErrorPopup = new Popup(document.getElementById('general-error-popup'));
         var latitude = null;
         var longitude = null;
         var tradeName = null;
-
-        // for local work in web broswers
-        //not working on device test app
-        /*if (host === localHost) {
+        /*
+        * device onready
+        */
+        function onDeviceReady() {
             init();
-        }*/
+        }
+        document.addEventListener('deviceready', onDeviceReady, false);
         init();
-
+        //function init
         function init() {
-            initNav();
             loadGift();
         }
-
+        /*
+        * load gift
+        */
         function loadGift() {
-            var giftLoadXHR = new XHR('GET', host + '/loadGiftForMobile?idPOS=' + posId + '&idGift=' + giftId + '&lat=' + userLat + '&lng=' + userLng);
-            giftLoadXHR.setContentType('application/x-www-form-urlencoded;charset=UTF-8');
-            giftLoadXHR.onReady(function (xhr) {
-                try {
-                    var business = JSON.parse(xhr.responseText);
-                    var pos = business.pos;
-                    var gift = pos.gift;
-                    var action = gift.action;
-                    latitude = pos.location.address.geolocation.latitude;
-                    longitude = pos.location.address.geolocation.longitude;
-                    tradeName = business.tradeName;
-                    document.getElementById('gift-name').textContent = gift.name;
-                    var n = gift.pictures.length;
-                    var i = 0;
-                    var found = false;
-                    var src = null;
-                    if (n > 0) {
-                        do {
-                            var pic = gift.pictures[i];
-                            found = pic.main;
-                            if (found) {
-                                src = pic.dataURI;
-                            }
-                            i++;
-                        } while (!found && i < n);
-                    }
-                    if (found) {
-                        document.getElementById('gift-picture').src = src;
-                    }
-                    if (gift.type.id === 24) {//other type
-                        document.getElementById('type-gift').textContent = gift.otheType;
-                    } else {
-                        document.getElementById('type-gift').textContent = gift.type.value1;
-                    }
-                    document.getElementById('gift-price').textContent = gift.priceFormatted;
-                    document.getElementById('gift-time').textContent = gift.elapseTime;
-                    document.getElementById('gift-description').textContent = gift.description;
-                    document.getElementById('action-name').textContent = action.name;
-                    n = action.pictures.length;
-                    i = 0;
-                    found = false;
-                    src = null;
-                    if (n > 0) {
-                        do {
-                            var pic = action.pictures[i];
-                            found = pic.main;
-                            if (found) {
-                                src = pic.dataURI;
-                            }
-                            i++;
-                        } while (!found && i < n);
-                    }
-                    if (found) {
+            $.ajax({
+                type: 'GET',
+                url: host + '/loadGiftForMobile?idPOS=' + posId + '&idGift=' + giftId + '&lat=' + userLat + '&lng=' + userLng,
+                success: function (response) {
+                    try {
+                        var business = JSON.parse(response);
+                        var pos = business.pos;
+                        var gift = pos.gift;
+                        var action = gift.action;
+                        latitude = pos.location.address.geolocation.latitude;
+                        longitude = pos.location.address.geolocation.longitude;
+                        tradeName = business.tradeName;
+                        window.localStorage.setItem('business-id', business.id);
+                        document.getElementById('gift-name').textContent = gift.name;
+                        var n = gift.pictures.length;
+                        var i = 0;
+                        var found = false;
+                        var src = null;
+                        if (n > 0) {
+                            do {
+                                var pic = gift.pictures[i];
+                                found = pic.main;
+                                if (found) {
+                                    src = pic.dataURI;
+                                }
+                                i++;
+                            } while (!found && i < n);
+                        }
+                        if (found) {
+                            document.getElementById('gift-picture').src = src;
+                        }
+                        if (gift.type.id === 24) {//other type
+                            document.getElementById('type-gift').textContent = gift.otheType;
+                        } else {
+                            document.getElementById('type-gift').textContent = gift.type.value1;
+                        }
+                        document.getElementById('gift-price').textContent = gift.priceFormatted;
+                        document.getElementById('gift-time').textContent = gift.elapseTime;
+                        document.getElementById('gift-description').textContent = gift.description;
+                        document.getElementById('action-name').textContent = action.name;
+                        n = action.pictures.length;
+                        i = 0;
+                        found = false;
+                        src = '../../public/images/action149x150.png';
+                        if (n > 0) {
+                            do {
+                                var pic = action.pictures[i];
+                                found = pic.main;
+                                if (found) {
+                                    src = pic.dataURI;
+                                }
+                                i++;
+                            } while (!found && i < n);
+                        }
                         document.getElementById('action-picture').src = src;
+                        document.getElementById('action-price').textContent = action.priceFormatted;
+                        document.getElementById('action-description').textContent = action.description;
+                        document.getElementById('terms-conditions-gift').textContent = gift.termsConditions;
+                        document.getElementById('business-name').textContent = tradeName;
+                        document.getElementById('pos-mb-phone').textContent = pos.location.phone.mobile;
+                        document.getElementById('pos-phone').textContent = pos.location.phone.number;
+                        document.getElementById('pos-email-contact').textContent = business.contact.login.email;
+                        document.getElementById('pos-distance').textContent = pos.distanceFormatted;
+                        document.getElementById('pos-address').textContent = pos.location.address.address;
+                        document.getElementById('business-name-2').textContent = tradeName;
+                        initializeMap();
+                    } catch (ex) {
+                        toast(response, 8000, 'toast-danger');
                     }
-                    document.getElementById('action-price').textContent = action.priceFormatted;
-                    document.getElementById('action-description').textContent = action.description;
-                    document.getElementById('terms-conditions-gift').textContent = gift.termsConditions;
-                    document.getElementById('business-name').textContent = tradeName;
-                    document.getElementById('pos-mb-phone').textContent = pos.location.phone.mobile;
-                    document.getElementById('pos-email-contact').textContent = business.contact.login.email;
-                    document.getElementById('pos-distance').textContent = pos.distanceFormatted;
-                    document.getElementById('pos-address').textContent = pos.location.address.address;
-                    document.getElementById('business-name-2').textContent = tradeName;
-                    document.getElementById('detail-gift').classList.remove('hidden');
-                    document.getElementById('msg-load').classList.add('hidden');
-                    initializeMap();
-                } catch (ex) {
-                    console.log(ex);
-                    document.getElementById('general-error-msg').textContent = xhr.responseText;
-                    generalErrorPopup.show();
+                },
+                error: function (xhr) {
+                    document.getElementById('error-msg').textContent = xhr.responseText;
+                    $('#modal-error').openModal();
                 }
             });
-            giftLoadXHR.onError(function () {
-                document.getElementById('error-msg').textContent = xhr.statusText;
-                errorPopup.show();
-            });
-            giftLoadXHR.send();
         }
 
         //init map
@@ -328,36 +424,11 @@
                 position: latlng,
                 map: map,
                 title: tradeName,
-                icon: '../../images/gift-shop64.png'
+                icon: '../../public/images/gift-shop64.png'
             });
         }
-        function initNav() {
-            document.getElementById('nav-app').style.height = Utils.getWindowMaxHeight() + 'px';
-        }
-        function toggleNav() {
-            var nav = document.getElementById('nav-app');
-            nav.classList.toggle('hidden');
-        }
-        function hiddenNav() {
-            var nav = document.getElementById('nav-app');
-            if (!nav.classList.contains('hidden')) {
-                nav.classList.add('hidden');
-            }
-        }
-        function singOut() {
-            window.localStorage.clear();
-            window.localStorage.setItem("user-is-register", 1);
-            window.location = '../../index.html';
-        }
-
-
-
-        //device ready
-        function onDeviceReady() {
-            init();
-        }
-        document.addEventListener("deviceready", onDeviceReady, false);
-
     </script>
 </body>
+
 </html>
+

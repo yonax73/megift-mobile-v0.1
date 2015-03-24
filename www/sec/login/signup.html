@@ -263,6 +263,7 @@
                             window.localStorage.setItem('id-login', response);
                             window.localStorage.setItem('partner', JSON.stringify(partner));
                             window.localStorage.setItem('show-menu', false);
+                            window.localStorage.setItem('block-search', 1);
                             $('#modal-success').openModal();
                         } else {
                             toast(response, 8000, 'toast-danger');

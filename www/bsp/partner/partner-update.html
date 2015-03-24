@@ -24,7 +24,7 @@
     </div>
     <div class="container container-fluid deep-orange m-top-1rem separator-gray-300">
         <form id="photo-form">
-            <img class="image-fluid" id="image-partner" src="../../public/images/avatar-user.png" />
+            <img class="image-fluid" id="image-partner" src="../../public/images/avatar.png" />
             <div id="picture-partner-content" class="fixed-action-btn">
                 <a href="#" id="picture-upload" rel="external" class="btn btn-floating btn-large waves-effect waves-light deep-orange">
                     <i class="mdi-image-camera-alt"></i>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s4">
-                        <i class="fa fa-transgender prefix"></i>
+                        <i class="fa fa-transgender prefix red-text"></i>
                         <label>Soy:</label>
                     </div>
                     <div class="col s8">
@@ -141,14 +141,14 @@
                 selectYears: 20
             });
             //load partner data
-            loadPartner();
+            fillPartner();
             //init picture events
             pictureInit();
         }
         /*
-        * load parner
+        * fill parner
         */
-        function loadPartner() {
+        function fillPartner() {
             //atributes
             var title = document.getElementById('title');
             var imagePartner = document.getElementById('image-partner');
@@ -162,6 +162,7 @@
             var idLogin = document.getElementById('id-login');
             var idLocation = document.getElementById('id-location');
             var idCity = document.getElementById('id-city');
+            //load partner object
 
             //set
             title.textContent = partner.fullName;
@@ -181,6 +182,44 @@
             if (partner.picture.id > 0) {
                 imagePartner.src = partner.picture.dataURI;
             }
+        }
+        //load partner
+        function loadPartner() {
+            $.ajax({
+                type: 'POST',
+                url: host + '/loadPartner',
+                data: 'id-login=' + idLogin,
+                success: function (response) {
+                    try {
+                        //atributes
+                        var partner = JSON.parse(response);
+                        var imagePartner = document.getElementById('image-partner');
+                        var namePartner = document.getElementById('name-partner');
+                        var genderPartner = document.getElementById('gender-partner');
+                        var birthdayPartner = document.getElementById('birthday-partner');
+                        var cityPartner = document.getElementById('city-partner');
+                        var emailPartner = document.getElementById('email-partner');
+                        //set
+                        window.localStorage.setItem('partner', JSON.stringify(partner));
+                        namePartner.textContent = partner.fullName;
+                        genderPartner.textContent = partner.gender.id === FEMALE ? 'Mujer' : partner.gender.id === MALE ? 'Hombre' : '';
+                        birthdayPartner.textContent = partner.birthday === null ? '' : partner.formatBirthday;
+                        cityPartner.textContent = partner.location.address === null ? '' : partner.location.address.city.city;
+                        emailPartner.textContent = partner.login.email;
+                        if (partner.picture.id > 0) {
+                            imagePartner.src = partner.picture.dataURI;
+                        } else {
+                            imagePartner.src = '../../public/images/avatar.png';
+                        }
+                    } catch (ex) {
+                        toast(response, 8000, 'toast-danger');
+                    }
+                },
+                error: function (xhr) {
+                    document.getElementById('error-msg').textContent = xhr.responseText;
+                    $('#modal-error').openModal();
+                }
+            });
         }
         /*
         * Inicializar los eventos y funcionalidad para la imagen
@@ -247,8 +286,8 @@
             }
         }
         /*
-  * submit form
-  */
+          * submit form
+          */
         $('#partner-form').submit(function (e) {
             e.preventDefault();
             var valid = new Array();
@@ -396,34 +435,5 @@
             window.location = '../../index.html';
         }
     </script>
-    <!--div class="content-main">
-
-
-
-        //partner form
-        partnerForm.onsubmit(function () {
-            if (partnerForm.isValid()) {
-                XHR.byPost(partnerForm.serialize(), host + '/updatePartner', function () {
-                    beforeSendPopup.show();
-                }, function (xhr) {
-                    beforeSendPopup.close();
-                    var response = xhr.responseText;
-                    if (response === successResponse) {
-                        document.getElementById('success-msg').textContent = 'El perfil se guardo correctamente!';
-                        successPopup.show();
-                    } else {
-                        document.getElementById('general-error-msg').textContent = response;
-                        generalErrorPopup.show();
-                    }
-                }, function (xhr) {
-                    beforeSendPopup.close();
-                    document.getElementById('error-msg').textContent = xhr.statusText;
-                    errorPopup.show();
-                });
-            }
-        });
-
-
-    </script>-->
 </body>
 </html>

@@ -12,7 +12,7 @@
     <section class="container">
         <div class="row">
             <div class="col s12">
-                <img class="logo-center z-depth-5" src="../www/public/images/logo128x128.png">
+                <img class="logo-center z-depth-5" src="../www/public/images/logo-full-216x96.png">
             </div>
         </div>
     </section>
@@ -36,8 +36,8 @@
         startApp();
         function startApp() {
             window.localStorage.setItem('host', host);
-            var userId = window.localStorage.getItem("login-id");
-            var userIsRegister = window.localStorage.getItem("user-is-register");
+            var userId = window.localStorage.getItem('id-login');
+            var userIsRegister = window.localStorage.getItem("user-is-register");          
             if (userId != null && userId > 0) {
                 window.location = 'bsp/gift/search-gift.html';
             } else if (userIsRegister != null && userIsRegister > 0) {
