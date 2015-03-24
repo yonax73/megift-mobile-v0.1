@@ -9,7 +9,7 @@
     <link href="../public/css/app.min.css" rel="stylesheet" />
 
 </head>
-<body class="i-ease-in i-1s i-fade-in">
+<body class="i-ease-in i-1s i-fade-in flow-text">
     <nav class="deep-orange" role="navigation">
         <div class="nav-wrapper container">
             <a href="#" class="brand-logo brand-logo-s">
@@ -68,7 +68,7 @@
     <section class="container">
         <div class="row m-top-1rem">
             <div class="col s12 m12">
-                <p class="flow-text">
+                <p>
                     <strong>Cuentale a dos amigos</strong>
                 </p>
             </div>
@@ -102,7 +102,7 @@
         </div>
         <div class="row">
             <div class="col s12 m12">
-                <p class="flow-text">
+                <p>
                     <strong>Ó cuentale a tus amigos de:</strong>
                 </p>
             </div>
@@ -148,9 +148,6 @@
             <a href="../sec/settings/tutorial.html" rel="external" class="btn waves-effect waves-green btn-flat modal-action">Buscar Regalos</a>
         </div>
     </div>
-    <script src="../intelxdk.js"></script>
-    <script src="../cordova.js"></script>
-    <script src="../xhr.js"></script>
     <script src="../public/js/jquery.min.js"></script>
     <script src="../public/materialize/js/materialize.min.js"></script>
     <script src="../public/js/inventor/BaseForm.min.js"></script>
@@ -221,6 +218,8 @@
                         hiddenPreloader();
                         enabledFormControls();
                         if (response === successResponse) {
+                            //desbloquear regalo
+                            window.localStorage.setItem('block-gift', 0);
                             $('#modal-success').openModal();
                         } else {
                             toast(response, 8000, 'toast-danger');

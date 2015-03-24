@@ -9,7 +9,7 @@
     <link href="../../public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../../public/css/app.min.css" rel="stylesheet" />
 </head>
-<body class="i-ease-in i-1s i-fade-in">
+<body class="i-ease-in i-1s i-fade-in flow-text">
     <div class="navbar-fixed">
         <nav class="deep-orange" role="navigation">
             <div class="nav-wrapper container">
@@ -22,7 +22,7 @@
             </div>
         </nav>
     </div>
-    <div class="container container-fluid deep-orange m-top-1rem separator-gray-300">
+    <div class="container container-fluid  m-top-1rem">
         <form id="photo-form">
             <img class="image-fluid" id="image-partner" src="../../public/images/avatar.png" />
             <div id="picture-partner-content" class="fixed-action-btn">
@@ -38,7 +38,7 @@
     </div>
     <section class="container m-top-1rem">
         <div class="row">
-            <form id="partner-form" class="col s12 m12">
+            <form id="partner-form" class="col s11 m11">
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="mdi-social-person prefix"></i>
@@ -116,14 +116,12 @@
             <a href="#" rel="external" class="btn waves-effect waves-green btn-flat modal-action modal-close">Aceptar</a>
         </div>
     </div>
-    <script src="../../intelxdk.js"></script>
-    <script src="../../cordova.js"></script>
-    <script src="../../xhr.js"></script>
     <script src="../../public/js/jquery.min.js"></script>
     <script src="../../public/materialize/js/materialize.min.js"></script>
     <script src="../../public/js/inventor/BaseForm.min.js"></script>
     <script>
         var host = window.localStorage.getItem('host');
+        var idLogin = window.localStorage.getItem('id-login');
         var partner = JSON.parse(window.localStorage.getItem('partner'));
         var successResponse = 'OK';
         var FEMALE = 1;
@@ -141,9 +139,20 @@
                 selectYears: 20
             });
             //load partner data
-            fillPartner();
+            initPartner();
             //init picture events
             pictureInit();
+        }
+        /*
+        * init partner
+        */
+        function initPartner() {
+            console.log(partner);
+            if ((partner !== 'undefined' || partner !== undefined) && partner !== null) {
+                fillPartner();
+            } else {
+                loadPartner();
+            }
         }
         /*
         * fill parner
@@ -162,8 +171,6 @@
             var idLogin = document.getElementById('id-login');
             var idLocation = document.getElementById('id-location');
             var idCity = document.getElementById('id-city');
-            //load partner object
-
             //set
             title.textContent = partner.fullName;
             idPartner.value = partner.id;
@@ -192,25 +199,8 @@
                 success: function (response) {
                     try {
                         //atributes
-                        var partner = JSON.parse(response);
-                        var imagePartner = document.getElementById('image-partner');
-                        var namePartner = document.getElementById('name-partner');
-                        var genderPartner = document.getElementById('gender-partner');
-                        var birthdayPartner = document.getElementById('birthday-partner');
-                        var cityPartner = document.getElementById('city-partner');
-                        var emailPartner = document.getElementById('email-partner');
-                        //set
-                        window.localStorage.setItem('partner', JSON.stringify(partner));
-                        namePartner.textContent = partner.fullName;
-                        genderPartner.textContent = partner.gender.id === FEMALE ? 'Mujer' : partner.gender.id === MALE ? 'Hombre' : '';
-                        birthdayPartner.textContent = partner.birthday === null ? '' : partner.formatBirthday;
-                        cityPartner.textContent = partner.location.address === null ? '' : partner.location.address.city.city;
-                        emailPartner.textContent = partner.login.email;
-                        if (partner.picture.id > 0) {
-                            imagePartner.src = partner.picture.dataURI;
-                        } else {
-                            imagePartner.src = '../../public/images/avatar.png';
-                        }
+                        partner = JSON.parse(response);
+                        fillPartner();
                     } catch (ex) {
                         toast(response, 8000, 'toast-danger');
                     }
@@ -381,6 +371,14 @@
                         enabledFormControls();
                         if (response === successResponse) {
                             toast('El perfil se guardo correctamente!', 8000);
+                            //validar si el usuario tiene el search bloqueado
+                            var isBlocked = window.localStorage.getItem('block-search');
+                            if ((isBlocked !== 'undefined' || isBlocked !== undefined) && isBlocked > 0) {
+                                //desbloquear el search
+                                window.localStorage.setItem('block-search', 0);
+                                //redirecionar a search gift
+                                window.location = '../gift/search-gift.html';
+                            }
                         } else {
                             toast(response, 8000, 'toast-danger');
                         }
