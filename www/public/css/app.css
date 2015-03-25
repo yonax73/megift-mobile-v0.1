@@ -404,7 +404,12 @@ a.deep-orange-500-text,
 .m-top-1rem {
     margin-top: 1rem;
 }
-
+ .m-top-2rem{
+       margin-top: 2rem;
+ }
+ .m-top-3rem{
+       margin-top: 3rem;
+ }
 .image-fluid {
     display: table;
     margin-bottom: 1rem;
@@ -467,7 +472,8 @@ a.deep-orange-500-text,
 /*ID FOR sendInvitationsControl*/
 #invite-friend-content,
 #update-partner-content,
-#picture-partner-content {
+#picture-partner-content,
+#submit-form-content {
     position: absolute;
     bottom: -35px;
 }
@@ -484,8 +490,8 @@ a.deep-orange-500-text,
     }
 
     .slider ul.slides {
-         height: 640px;
-         overflow: auto;
+        height: 640px;
+        overflow: auto;
     }
 
         .slider ul.slides li img {
@@ -581,6 +587,20 @@ ul.side-nav {
     display: block;
 }
 
-#partner-form{
-    margin-top:3rem;
+#partner-form {
+    margin-top: 3rem;
+}
+/*LOGIN STYLES*/
+.image-center {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 90px;
+}
+
+#login-header{
+    height:100px;
 }
