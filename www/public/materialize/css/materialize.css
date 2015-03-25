@@ -5517,7 +5517,7 @@ small {
 
 #toast-container {
   display: block;
-  position: fixed;
+  position: absolute;
   z-index: 1001; }
   @media only screen and (max-width : 600px) {
     #toast-container {
