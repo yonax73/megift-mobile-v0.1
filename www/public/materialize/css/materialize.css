@@ -5548,7 +5548,7 @@ small {
   margin-top: 10px;
   position: relative;
   max-width: 100%;
-  height: 48px;
+  height:auto;
   line-height: 48px;
   background-color: #323232;
   padding: 0px 25px;

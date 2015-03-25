@@ -407,14 +407,15 @@ a.deep-orange-500-text,
 
 .image-fluid {
     display: table;
-    width: 100vw;
+    margin-bottom: 1rem;
     max-height: 220px;
+    width: 100%;
 }
 
 .container-fluid {
     margin: 0;
     padding: 0;
-    width: 100vw;
+    width: 100%;
     position: relative;
 }
 
@@ -483,7 +484,8 @@ a.deep-orange-500-text,
     }
 
     .slider ul.slides {
-        height: 100vh;
+         height: 640px;
+         overflow: auto;
     }
 
         .slider ul.slides li img {
@@ -504,3 +506,81 @@ a.deep-orange-500-text,
         font-weight: bold;
         top: 90%;
     }
+/************************************/
+/** OVERWRITE MODAL MATERIALIZE ****/
+/************************************/
+.modal {
+    max-height: 90%;
+    position: absolute;
+}
+
+    .modal.modal-fixed-footer .modal-footer {
+        bottom: 0;
+        position: absolute;
+    }
+
+    .modal.modal-fixed-footer .modal-content {
+        position: relative;
+    }
+
+    .modal.modal-fixed-footer {
+        height: auto;
+    }
+/************************************/
+/** OVERWRITE NAVBAR-FIXED MATERIALIZE ****/
+/************************************/
+.navbar-fixed nav {
+    position: absolute;
+    top: 0;
+}
+/************************************/
+/** OVERWRITE LABEL******************/
+/************************************/
+[type="radio"] + label::before, [type="radio"] + label::after {
+    padding: 12px;
+}
+
+label {
+    padding: 5px;
+    width: 100%;
+}
+/************************************/
+/** OVERWRITE SLIDE NAV**************/
+/************************************/
+nav ul li {
+    line-height: 40px;
+}
+
+#nav-mobile i {
+    height: 40px;
+    line-height: 40px;
+}
+
+ul.side-nav {
+    overflow: auto;
+    width: 240px;
+    z-index: 9999;
+}
+
+.drag-target {
+    z-index: 9998;
+}
+
+#sidenav-overlay {
+    background-color: rgba(0,0,0,0.5);
+    bottom: 0;
+    display: none;
+    height: 115%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    will-change: opacity;
+    z-index: 9997;
+    display: block;
+}
+
+#partner-form{
+    margin-top:3rem;
+}

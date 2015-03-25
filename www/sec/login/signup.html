@@ -8,7 +8,7 @@
     <link href="../../public/materialize/css/materialize.min.css" rel="stylesheet" />
     <link href="../../public/css/app.min.css" rel="stylesheet" />
 </head>
-<body class="i-ease-in i-1s i-fade-in">
+<body class="i-ease-in i-1s i-fade-in flow-text">
 
     <nav class="deep-orange" role="navigation">
         <div class="nav-wrapper container">
@@ -111,9 +111,6 @@
             <a href="../../social/sendInvitationsControl.html" rel="external" class="btn waves-effect waves-green btn-flat modal-action">Aceptar</a>
         </div>
     </div>
-    <script src="../../intelxdk.js"></script>
-    <script src="../../cordova.js"></script>
-    <script src="../../xhr.js"></script>
     <script src="../../public/js/jquery.min.js"></script>
     <script src="../../public/materialize/js/materialize.min.js"></script>
     <script src="../../public/js/inventor/BaseForm.min.js"></script>
@@ -257,13 +254,10 @@
                         hiddenPreloader();
                         enabledFormControls();
                         if (response > 0) {
-                            var partner = {};
-                            partner.name = document.getElementById('name-partner').value;
-                            partner.email = document.getElementById('email-partner').value;
-                            window.localStorage.setItem('id-login', response);
-                            window.localStorage.setItem('partner', JSON.stringify(partner));
+                            window.localStorage.setItem('id-login', response);                           
                             window.localStorage.setItem('show-menu', false);
                             window.localStorage.setItem('block-search', 1);
+                            window.localStorage.setItem('block-gift', 1);
                             $('#modal-success').openModal();
                         } else {
                             toast(response, 8000, 'toast-danger');
